@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DifficultyConfig>
+    <DConfig name="Easy"   description = "Cargado el nivel facil" valor = 3>   </DConfig>
+    <DConfig name="Medium" description = "Cargado el nivel medio" valor = 4>   </DConfig>
+    <DConfig name="Hard"   description = "Cargado el nivel dificil" valor = 5> </DConfig>
+</DifficultyConfig>
