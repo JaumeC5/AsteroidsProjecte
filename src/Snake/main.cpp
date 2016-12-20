@@ -49,9 +49,9 @@ int main(int argc, char* args[]) {
 	player.setRect(WIDTH / 2, HEIGHT / 2, 25, 25);
 	player.setTexture(R.getRender(), "../../res/ship.png");
 
-
 	SDL_Rect playerRect = { (WIDTH >> 1) - 50, (HEIGHT >> 1) - 50, 5, 5 };
 	SDL_Rect playerTarget = { 0,0,5,5 };
+
 	
 	//LOOP
 	while (IM.on()) {

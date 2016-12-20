@@ -38,4 +38,9 @@ public:
 		return rect;
 	}
 
+	void move(int x, int y) { // x i y han de ser obtingudes desde xml
+		rect.x += x;
+		rect.y += y;
+	}
+
 };
