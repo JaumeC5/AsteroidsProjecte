@@ -39,6 +39,12 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SpaceShip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h">
@@ -69,6 +75,9 @@
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Jaume\Desktop\Assteroids\src\Snake\Mob.hh">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceShip.h">
       <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>

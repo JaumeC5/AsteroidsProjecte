@@ -180,9 +180,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DifficultySelect.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="JOC no jugable.cpp" />
     <ClCompile Include="Le menú.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SpaceShip.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\Jaume\Desktop\Assteroids\src\Snake\ID.hh" />
@@ -193,6 +195,7 @@
     <ClInclude Include="InputManager.hh" />
     <ClInclude Include="Renderer.hh" />
     <ClInclude Include="Scene.hh" />
+    <ClInclude Include="SpaceShip.h" />
     <ClInclude Include="Sprite.hh" />
     <ClInclude Include="Window.hh" />
   </ItemGroup>

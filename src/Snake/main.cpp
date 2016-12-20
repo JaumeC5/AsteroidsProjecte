@@ -1,8 +1,8 @@
 #include "Renderer.hh"
-#include "Window.hh"
 #include "Sprite.hh"
 #include "GameEngine.hh"
 #include "InputManager.hh"
+#include "Window.hh"
 
 int main(int argc, char* args[]) {
 

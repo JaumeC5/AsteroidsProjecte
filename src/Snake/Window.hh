@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL.H>
+#include "SDL.h"
 #include <string>
 
 const int WIDTH = 640;
