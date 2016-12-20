@@ -185,6 +185,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C:\Users\Jaume\Desktop\Assteroids\src\Snake\ID.hh" />
+    <ClInclude Include="C:\Users\Jaume\Desktop\Assteroids\src\Snake\Mob.hh" />
     <ClInclude Include="GameEngine.hh" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Init.hh" />

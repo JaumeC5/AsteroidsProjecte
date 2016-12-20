@@ -65,5 +65,11 @@
     <ClInclude Include="InputManager.hh">
       <Filter>Controller</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\Jaume\Desktop\Assteroids\src\Snake\ID.hh">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Jaume\Desktop\Assteroids\src\Snake\Mob.hh">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
