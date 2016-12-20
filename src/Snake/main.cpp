@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Renderer.hh"
 #include "Sprite.hh"
 #include "GameEngine.hh"

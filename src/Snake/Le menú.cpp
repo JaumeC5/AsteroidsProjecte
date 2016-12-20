@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Header.h"
 #include "rapidxml.hpp"
 #include <fstream>
