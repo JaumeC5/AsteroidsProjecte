@@ -4,6 +4,7 @@
 #include "Sprite.hh"
 #include "GameEngine.hh"
 #include "InputManager.hh"
+#include "SpaceShip.h"
 #include "Window.hh"
 
 int main(int argc, char* args[]) {
@@ -54,7 +55,8 @@ int main(int argc, char* args[]) {
 	SDL_Rect playerRect = { (WIDTH >> 1) - 50, (HEIGHT >> 1) - 50, 5, 5 };
 	SDL_Rect playerTarget = { 0,0,5,5 };
 
-	
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+
 	//LOOP
 	while (IM.on()) {
 		IM.Update();
@@ -87,8 +89,8 @@ int main(int argc, char* args[]) {
 
 		case 3:
 			SDL_RenderCopy(R.getRender(), bg.getTexture(), nullptr, &bg.getRect());
-			SDL_RenderCopy(R.getRender(), player.getTexture(), nullptr, &player.getRect());
-			break;
+			SDL_RenderCopyEx(R.getRender(), player.getTexture(), nullptr, &player.getRect(), S.getAngle(), NULL, flip);  break;
+
 		case 4:
 			break;
 		case 5:

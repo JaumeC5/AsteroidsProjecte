@@ -1,5 +1,6 @@
 #pragma once
 #include "Init.hh"
+#include "SpaceShip.h"
 
 #define IM InputManager::Instance()
 
@@ -13,16 +14,19 @@ public:
 		return inputManager;
 	}
 
+
 	void Update() {
 		
-			
-			while (SDL_PollEvent(&evnt)) { // While input events exist, unpack them and store them in the SDL_Event variable one by one
-				switch (evnt.type) { 
-				case SDL_QUIT:				isRunning = false; break;
-				case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; std::cout << playerTarget.x << std::endl;
-				}
+		while (SDL_PollEvent(&evnt)) { // While input events exist, unpack them and store them in the SDL_Event variable one by one
+			switch (evnt.type) {
+			case SDL_QUIT: isRunning = false; break;
+			case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; std::cout << playerTarget.x << std::endl;
+
 			}
 		}
+	
+	}
+	
 	
 
 	SDL_Rect getCoords() {

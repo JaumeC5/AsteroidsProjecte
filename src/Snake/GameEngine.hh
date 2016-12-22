@@ -16,8 +16,6 @@ class GameEngine {
 
 private:
 
-	SpaceShip player;
-
 
 public:
 	//GameEngine();
