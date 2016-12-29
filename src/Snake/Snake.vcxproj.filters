@@ -42,9 +42,6 @@
     <ClCompile Include="SpaceShip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h">
@@ -55,9 +52,6 @@
     </ClInclude>
     <ClInclude Include="Window.hh">
       <Filter>View</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine.hh">
-      <Filter>Controller</Filter>
     </ClInclude>
     <ClInclude Include="Init.hh">
       <Filter>Utils</Filter>
@@ -77,8 +71,17 @@
     <ClInclude Include="C:\Users\Jaume\Desktop\Assteroids\src\Snake\Mob.hh">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="SpaceShip.h">
+    <ClInclude Include="SpaceShip.hh">
       <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.hh">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.hh">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="configXML.hh">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

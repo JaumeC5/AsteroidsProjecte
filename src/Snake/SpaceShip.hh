@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Init.hh"
+#include <iostream>
 #include "Window.hh"
-#include <map>
+
+using namespace std;
 
 
 #define S SpaceShip::Instance()
@@ -24,17 +25,13 @@ public:
 		static SpaceShip s;
 		return s;
 	}
-
-	int rot;
-
-
-
-
+	
 	SpaceShip();
-	~SpaceShip();
+
+	int rot;	
 
 
-	inline SDL_Point getPos() { return pos; }
+	//inline SDL_Point getPos() { return pos; }
 
 	double getAngle() { return angle; }
 
@@ -43,3 +40,5 @@ public:
 	void updatePos();
 
 };
+
+

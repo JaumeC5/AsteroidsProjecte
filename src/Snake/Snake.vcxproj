@@ -180,7 +180,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DifficultySelect.cpp" />
-    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="JOC no jugable.cpp" />
     <ClCompile Include="Le menú.cpp" />
     <ClCompile Include="main.cpp" />
@@ -189,14 +188,16 @@
   <ItemGroup>
     <ClInclude Include="C:\Users\Jaume\Desktop\Assteroids\src\Snake\ID.hh" />
     <ClInclude Include="C:\Users\Jaume\Desktop\Assteroids\src\Snake\Mob.hh" />
+    <ClInclude Include="configXML.hh" />
     <ClInclude Include="GameEngine.hh" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Init.hh" />
     <ClInclude Include="InputManager.hh" />
     <ClInclude Include="Renderer.hh" />
     <ClInclude Include="Scene.hh" />
-    <ClInclude Include="SpaceShip.h" />
+    <ClInclude Include="SpaceShip.hh" />
     <ClInclude Include="Sprite.hh" />
+    <ClInclude Include="Transform.hh" />
     <ClInclude Include="Window.hh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

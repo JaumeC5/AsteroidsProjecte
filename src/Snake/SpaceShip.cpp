@@ -1,16 +1,11 @@
 #pragma once
 
-#include "Init.hh"
-#include "SpaceShip.h"
+#include "SpaceShip.hh"
 
 SpaceShip::SpaceShip()
 : pos({WIDTH / 2, HEIGHT / 2})
 {
 
-}
-
-SpaceShip::~SpaceShip()
-{
 }
 
 
@@ -35,8 +30,6 @@ void SpaceShip::updatePos()
 
 	if (angle >= 360) { angle -= 360; }
 	if (angle <= -360) { angle += 360; }
-
-	//obtenir els punts nous de x i y i restarlos a la posició per avançar o tornar entrere
 
 
 	//cambiar posicion
