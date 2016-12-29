@@ -186,13 +186,13 @@
     <ClCompile Include="SpaceShip.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\Jaume\Desktop\Assteroids\src\Snake\ID.hh" />
-    <ClInclude Include="C:\Users\Jaume\Desktop\Assteroids\src\Snake\Mob.hh" />
     <ClInclude Include="configXML.hh" />
     <ClInclude Include="GameEngine.hh" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="ID.hh" />
     <ClInclude Include="Init.hh" />
     <ClInclude Include="InputManager.hh" />
+    <ClInclude Include="Mob.hh" />
     <ClInclude Include="Renderer.hh" />
     <ClInclude Include="Scene.hh" />
     <ClInclude Include="SpaceShip.hh" />
