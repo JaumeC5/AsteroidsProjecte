@@ -77,10 +77,10 @@
     <ClInclude Include="configXML.hh">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Mob.hh">
+    <ClInclude Include="ID.hh">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="ID.hh">
+    <ClInclude Include="Mob.hh">
       <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>
