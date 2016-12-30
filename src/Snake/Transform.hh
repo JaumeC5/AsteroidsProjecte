@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Init.hh"
 struct Transform {
 	union {

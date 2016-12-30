@@ -12,6 +12,6 @@ public:
 	void onExit();
 	void Update();
 	void Draw();
-
+	
 };
 

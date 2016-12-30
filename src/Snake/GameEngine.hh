@@ -14,39 +14,39 @@
 
 void getConfig() {
 
-	using namespace rapidxml;
-	using namespace std;
-	int temp;
-	vector <int> props;
+using namespace rapidxml;
+using namespace std;
+int temp;
+vector <int> props;
 
-	xml_document <>doc;
-	ifstream file("config.xml");
-	stringstream buffer;
-	buffer << file.rdbuf();
-	file.close();
-	string content(buffer.str());
-	doc.parse<0>(&content[0]);
+xml_document <>doc;
+ifstream file("config.xml");
+stringstream buffer;
+buffer << file.rdbuf();
+file.close();
+string content(buffer.str());
+doc.parse<0>(&content[0]);
 
-	xml_node<> *root = doc.first_node();
+xml_node<> *root = doc.first_node();
 
-	for (xml_node <> *node = root->first_node("Level"); node; node = node->next_sibling()) {
-		xml_attribute <> *attr = node->first_attribute();
-		cout << attr->value() << endl;
+for (xml_node <> *node = root->first_node("Level"); node; node = node->next_sibling()) {
+	xml_attribute <> *attr = node->first_attribute();
+	cout << attr->value() << endl;
 
-		for (xml_node <> *n = node->first_node(); n; n = n->next_sibling()) {
-			cout << n->name() << ": " << n->value() << endl;
-			temp = atoi(n->value());
-			props.push_back(temp);
-
-
-		}
-		cout << endl;
+	for (xml_node <> *n = node->first_node(); n; n = n->next_sibling()) {
+		cout << n->name() << ": " << n->value() << endl;
+		temp = atoi(n->value());
+		props.push_back(temp);
 
 
 	}
-	for (int i = 0; i < props.size(); i++) {
-		cout << props[i] << " ";
-	}
+	cout << endl;
+
+
+}
+for (int i = 0; i < props.size(); i++) {
+	cout << props[i] << " ";
+}
 
 }
 
@@ -107,11 +107,11 @@ void Run() {
 	Mob aux;
 	aux.generate(LARGE);
 	aux.getCoords();
-
+	
 
 	Mob u;
 	u.generate(UFO);
-	vector <Mob> mobs = { aux };
+	vector <Mob> mobs = {aux};
 
 	//LOOP
 	while (IM.on()) {
@@ -152,8 +152,8 @@ void Run() {
 				cout << "pause enabled" << endl;
 			else
 				cout << "pause disabled" << endl;
-
-
+			
+			
 			counter++;
 			maxMobs = 5;
 			//cout << mobsCreated << endl;
@@ -162,7 +162,7 @@ void Run() {
 			if (counter % 150 == 0 && mobsCreated < maxMobs) {
 				Mob x;
 				toGenerate = rand() % 3;
-				switch (toGenerate) {
+				switch (toGenerate) {	
 				case 0:
 					x.generate(SMALL);
 					x.getCoords();
@@ -179,14 +179,14 @@ void Run() {
 					mobs.push_back(x);
 					break;
 				}
-
+				
 				mobsCreated++;
 			}
-
-			for (int i = 0; i < mobs.size(); i++) {
-				SDL_RenderCopy(R.getRender(), mobs[i].getSprite().getTexture(), nullptr, &mobs[i].a());
-				mobs[i].mobMovement();
-			}
+			
+				for (int i = 0; i < mobs.size(); i++) {
+					SDL_RenderCopy(R.getRender(), mobs[i].getSprite().getTexture(), nullptr, &mobs[i].a());
+					mobs[i].mobMovement();
+				}
 			break;
 		case 4:
 			break;

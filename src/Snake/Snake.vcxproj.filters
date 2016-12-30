@@ -53,23 +53,26 @@
     <ClInclude Include="Window.hh">
       <Filter>View</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngine.hh">
+      <Filter>Controller</Filter>
+    </ClInclude>
     <ClInclude Include="Init.hh">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.hh">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.hh">
-      <Filter>Model</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.hh">
       <Filter>Controller</Filter>
     </ClInclude>
-    <ClInclude Include="SpaceShip.hh">
+    <ClInclude Include="Scene.hh">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngine.hh">
-      <Filter>Controller</Filter>
+    <ClInclude Include="ID.hh">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Mob.hh">
+      <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="Transform.hh">
       <Filter>Model</Filter>
@@ -77,10 +80,7 @@
     <ClInclude Include="configXML.hh">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="ID.hh">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Mob.hh">
+    <ClInclude Include="SpaceShip.hh">
       <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>

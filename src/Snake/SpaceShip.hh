@@ -25,10 +25,10 @@ public:
 		static SpaceShip s;
 		return s;
 	}
-	
+
 	SpaceShip();
 
-	int rot;	
+	int rot;
 
 
 	//inline SDL_Point getPos() { return pos; }
@@ -40,5 +40,4 @@ public:
 	void updatePos();
 
 };
-
 

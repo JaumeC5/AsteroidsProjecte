@@ -45,7 +45,7 @@ vector<int> getProps() // funció que agafa informació de configuració de l'arxiu
 
 	}
 	/*for (int i = 0; i < props.size(); i++) {
-	cout << props[i] << " ";
+		cout << props[i] << " ";
 	}*/
 	return props;
 }

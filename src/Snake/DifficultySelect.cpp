@@ -28,8 +28,8 @@ int main(int, char*[]) {
 
 		// RENDERER
 		SDL_Renderer *renderer = SDL_CreateRenderer(window, -1,
-		SDL_RENDERER_ACCELERATED |
-		SDL_RENDERER_PRESENTVSYNC);
+			SDL_RENDERER_ACCELERATED |
+			SDL_RENDERER_PRESENTVSYNC);
 		if (renderer == nullptr) throw SDL_GetError();
 
 		//TITLE
@@ -39,6 +39,7 @@ int main(int, char*[]) {
 		//SDL_Surface *textSurface = TTF_RenderText_Solid(font, "Asteroids", color);
 		//SDL_Rect fontRect = { WIDTH / 2 - 100, 50, 200,50 };
 		//SDL_Texture *text = SDL_CreateTextureFromSurface(renderer, textSurface);
+
 
 		// SPRITES
 		SDL_Texture *bgTexture = IMG_LoadTexture(renderer, "../../res/bg.png");
@@ -72,46 +73,46 @@ int main(int, char*[]) {
 				default:;
 				}
 			}
-		// UPDATE
-		playerRect.x += (playerTarget.x - playerRect.x);
-		playerRect.y += (playerTarget.y - playerRect.y);
+			// UPDATE
+			playerRect.x += (playerTarget.x - playerRect.x);
+			playerRect.y += (playerTarget.y - playerRect.y);
 
-		printf("%d %d\n", playerRect.x, playerRect.y);
+			printf("%d %d\n", playerRect.x, playerRect.y);
 
-		if (playerRect.x >= 229 && playerRect.x <= 329 && playerRect.y >= 15 && playerRect.y <= 58 && event.type == SDL_MOUSEBUTTONDOWN) {
+			if (playerRect.x >= 229 && playerRect.x <= 329 && playerRect.y >= 15 && playerRect.y <= 58 && event.type == SDL_MOUSEBUTTONDOWN) {
 
-			// Carregar dificultat 1
-			printf("1\n");
+				// Carregar dificultat 1
+				printf("1\n");
+			}
+
+			
+
+			if (playerRect.x >= 229 && playerRect.x <= 329 && playerRect.y >= 114 && playerRect.y <= 158 && event.type == SDL_MOUSEBUTTONDOWN){
+			
+				// Carregar dificultat 2
+				printf("2\n");
+			}
+
+			
+
+			if (playerRect.x >= 229 && playerRect.x <= 329 && playerRect.y >= 214 && playerRect.y <= 258 && event.type == SDL_MOUSEBUTTONDOWN) {
+
+				// Carregar dificultat 3
+				printf("3\n");
+			}
+
+
+
+			// DRAW
+			SDL_RenderCopy(renderer, bgTexture, nullptr, &bgRect);
+			SDL_RenderCopy(renderer, playerTexture, nullptr, &playerRect);
+			//SDL_RenderCopy(renderer, text, nullptr, &fontRect);
+			SDL_RenderCopy(renderer, easyText, nullptr, &easyRect);
+			SDL_RenderCopy(renderer, mediumText, nullptr, &mediumRect);
+			SDL_RenderCopy(renderer, hardText, nullptr, &hardRect);
+
+			SDL_RenderPresent(renderer);
 		}
-
-
-
-		if (playerRect.x >= 229 && playerRect.x <= 329 && playerRect.y >= 114 && playerRect.y <= 158 && event.type == SDL_MOUSEBUTTONDOWN){
-
-			// Carregar dificultat 2
-			printf("2\n");
-		}
-
-
-
-		if (playerRect.x >= 229 && playerRect.x <= 329 && playerRect.y >= 214 && playerRect.y <= 258 && event.type == SDL_MOUSEBUTTONDOWN) {
-
-			// Carregar dificultat 3
-			printf("3\n");
-		}
-
-
-
-		// DRAW
-		SDL_RenderCopy(renderer, bgTexture, nullptr, &bgRect);
-		SDL_RenderCopy(renderer, playerTexture, nullptr, &playerRect);
-		//SDL_RenderCopy(renderer, text, nullptr, &fontRect);
-		SDL_RenderCopy(renderer, easyText, nullptr, &easyRect);
-		SDL_RenderCopy(renderer, mediumText, nullptr, &mediumRect);
-		SDL_RenderCopy(renderer, hardText, nullptr, &hardRect);
-
-		SDL_RenderPresent(renderer);
-	}
 		// DESTROY
 		SDL_DestroyWindow(window);
 		SDL_DestroyTexture(bgTexture);

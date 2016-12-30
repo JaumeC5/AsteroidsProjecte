@@ -12,7 +12,7 @@ class Mob {
 	SDL_Rect rect;
 	int lvlSpeed;
 	int rDir = rand() % 8;
-
+	
 public:
 	void generate(AsteroidID type) {
 		switch (type) {
@@ -51,8 +51,8 @@ public:
 	}
 
 	void mobMovement() { // FER MOURE ELS METEORITS
-
-
+		
+		
 		std::vector <int> v;
 		v = getProps(); // works
 		int speed;
@@ -76,7 +76,7 @@ public:
 			rect.y = HEIGHT;
 		else if (rect.y >= HEIGHT + 1)
 			rect.y = 1;
-
+				
 		switch (rDir) {
 		case 0: //up
 			rect.y -= speed;
@@ -84,7 +84,7 @@ public:
 			break;
 		case 1: //up-right
 			rect.x += speed;
-			rect.y -= speed;
+			rect.y -= speed;				
 			break;
 		case 2: //right
 			rect.x += speed;
@@ -107,14 +107,14 @@ public:
 			rect.x -= speed;
 			rect.y -= speed;
 		default:
-			break;
+			break;	
 		}
-
+		
 		//cout << rect.x << " " << rect.y << endl;
 	}
 
 	void destroy() {
-
+		
 	}
 
 

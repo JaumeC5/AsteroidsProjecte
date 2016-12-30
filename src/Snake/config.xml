@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DifficultyConfig>
-    <DConfig name="Easy"   description = "Cargado el nivel facil" valor = 3>   </DConfig>
-    <DConfig name="Medium" description = "Cargado el nivel medio" valor = 4>   </DConfig>
-    <DConfig name="Hard"   description = "Cargado el nivel dificil" valor = 5> </DConfig>
-</DifficultyConfig>
+<Config>
+
+    <Level name="Easy">
+
+		<HPmultiplier>5</HPmultiplier>
+		<enemySpeed>1</enemySpeed>
+		<numEnemies>1</numEnemies>
+		<enemyIncrement>1</enemyIncrement>
+
+    </Level>
+	
+    <Level name="Medium">
+        <HPmultiplier>3</HPmultiplier>
+		<enemySpeed>2</enemySpeed>
+		<numEnemies>2</numEnemies>
+		<enemyIncrement>2</enemyIncrement>
+    </Level>
+	
+    <Level name="Hard">
+        <HPmultiplier>1</HPmultiplier>
+		<enemySpeed>3</enemySpeed>
+		<numEnemies>3</numEnemies>
+		<enemyIncrement>4</enemyIncrement>
+    </Level>
+	
+</Config>

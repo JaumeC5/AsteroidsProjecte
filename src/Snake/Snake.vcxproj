@@ -23,7 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Snake</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>Asteroids_JaumeCompany_ToniFerrari</ProjectName>
+    <ProjectName>Asteroids_ToniFerrari_JaumeCompany</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -187,12 +187,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="configXML.hh" />
+    <ClInclude Include="Mob.hh" />
     <ClInclude Include="GameEngine.hh" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="ID.hh" />
     <ClInclude Include="Init.hh" />
     <ClInclude Include="InputManager.hh" />
-    <ClInclude Include="Mob.hh" />
     <ClInclude Include="Renderer.hh" />
     <ClInclude Include="Scene.hh" />
     <ClInclude Include="SpaceShip.hh" />

@@ -3,7 +3,6 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <iostream>
-#include <string>
 
 #define R Renderer::Instance()
 
