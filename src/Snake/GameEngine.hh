@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include "InputManager.hh"
 #include "Mob.hh"
+#include "SpaceShip.hh"
 
 
 void getConfig() {
@@ -151,14 +152,15 @@ void Run() {
 			if (pause)
 				cout << "pause enabled" << endl;
 			else
-				cout << "pause disabled" << endl;
+				//cout << "pause disabled" << endl;
 			
 			
 			counter++;
 			maxMobs = 5;
 			//cout << mobsCreated << endl;
 			SDL_RenderCopy(R.getRender(), bg.getTexture(), nullptr, &bg.getRect());
-			SDL_RenderCopy(R.getRender(), player.getTexture(), nullptr, &player.getRect());
+			SDL_RenderCopyEx(R.getRender(), player.getTexture(), nullptr, &player.getRect(), S.getAngle(), &S.getPos(), S.getFlip());
+
 			if (counter % 150 == 0 && mobsCreated < maxMobs) {
 				Mob x;
 				toGenerate = rand() % 3;

@@ -19,6 +19,7 @@ private:
 	bool b[4]{ 0,0,0,0 };
 
 	SDL_Point pos;
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 public:
 	inline static SpaceShip &Instance() {
@@ -31,8 +32,8 @@ public:
 	int rot;
 
 
-	//inline SDL_Point getPos() { return pos; }
-
+	SDL_Point getPos() { return pos; }
+	SDL_RendererFlip getFlip() { return flip;  }
 	double getAngle() { return angle; }
 
 	void rotate(const int& val) { rot = val; }
