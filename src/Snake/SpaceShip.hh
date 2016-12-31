@@ -18,7 +18,7 @@ private:
 	SDL_Event evnt;
 	bool b[4]{ 0,0,0,0 };
 
-	SDL_Point pos;
+	SDL_Point pos = {WIDTH / 2, HEIGHT / 2};
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 public:

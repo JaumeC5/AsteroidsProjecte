@@ -94,7 +94,7 @@ void Run() {
 	hard.setSurface(font, "Hard", color);
 
 	Sprite player;
-	player.setRect(WIDTH / 2, HEIGHT / 2, 25, 25);
+	player.setRect(0, 0, 25, 25);
 	player.setTexture(R.getRender(), "../../res/ship.png");
 
 	Mob s;
@@ -117,6 +117,7 @@ void Run() {
 	//LOOP
 	while (IM.on()) {
 		IM.Update();
+		S.updatePos();
 		//std::cout << scene << std::endl;
 		switch (scene) {
 		case 1:
@@ -153,8 +154,7 @@ void Run() {
 				cout << "pause enabled" << endl;
 			else
 				//cout << "pause disabled" << endl;
-			
-			
+
 			counter++;
 			maxMobs = 5;
 			//cout << mobsCreated << endl;

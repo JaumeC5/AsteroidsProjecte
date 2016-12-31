@@ -11,6 +11,7 @@ SpaceShip::SpaceShip()
 
 void SpaceShip::updatePos()
 {
+
 	while (SDL_PollEvent(&evnt)) {
 		switch (evnt.type) {
 		case SDL_KEYDOWN:
@@ -20,8 +21,8 @@ void SpaceShip::updatePos()
 			}
 		case SDL_KEYUP:
 			switch (evnt.key.keysym.sym) {
-			case SDLK_LEFT: b[0] = false; cout << "Stop Rot"; break;
-			case SDLK_RIGHT: b[1] = false; cout << "Stop Rot"; break;
+			case SDLK_LEFT: b[0] = false; cout << "Stop Rot" << endl; break;
+			case SDLK_RIGHT: b[1] = false; cout << "Stop Rot" << endl; break;
 			}
 		}
 		if (b[0]) { angle -= 3; };
