@@ -83,5 +83,8 @@
     <ClInclude Include="SpaceShip.hh">
       <Filter>Model</Filter>
     </ClInclude>
+    <ClInclude Include="GameLoop.hh">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

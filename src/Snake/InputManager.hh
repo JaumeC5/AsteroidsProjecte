@@ -6,9 +6,6 @@
 bool pause = false;
 
 class InputManager {
-
-
-
 public:
 	inline static InputManager &Instance() {
 		static InputManager inputManager;
@@ -17,15 +14,25 @@ public:
 
 	void Update() {
 		
-			
 			while (SDL_PollEvent(&evnt)) { // While input events exist, unpack them and store them in the SDL_Event variable one by one
 				switch (evnt.type) { 
-				case SDL_QUIT:				isRunning = false;  break;
-				case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; break; //std::cout << playerTarget.x << std::endl;
-				case SDL_SCANCODE_SPACE: break;
-					
-					//randCoords();
-					
+				case SDL_QUIT: isRunning = false;  break;
+				case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; break;
+				
+				}
+				if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
+					bool once = false;
+					if (!pause && !once) {
+						cout << "Paused" << endl;
+						pause = true;
+						once = true;
+					}
+					if (pause && !once) {
+						cout << "Unpaused" << endl;
+						pause = false;
+						once = true;
+					}
+						
 				}
 			}
 		}
@@ -56,6 +63,7 @@ public:
 private:
 	bool isRunning = true;
 	SDL_Rect playerTarget = { 0,0,5,5 };
+	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 	SDL_Rect r;
 	SDL_Event evnt;
 	

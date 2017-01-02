@@ -187,6 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="configXML.hh" />
+    <ClInclude Include="GameLoop.hh" />
     <ClInclude Include="Mob.hh" />
     <ClInclude Include="GameEngine.hh" />
     <ClInclude Include="Header.h" />

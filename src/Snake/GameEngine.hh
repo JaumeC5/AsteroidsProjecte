@@ -65,8 +65,20 @@ void Run() {
 	R.setWindow(window.getWindow());
 
 	Sprite bg;
-	bg.setTexture(R.getRender(), "../../res/bg.png");
+	bg.setTexture(R.getRender(), "../../res/bgmenu.jpg");
 	bg.setRect(0, 0, WIDTH, HEIGHT);
+
+	Sprite bgeasy;
+	bgeasy.setTexture(R.getRender(), "../../res/bgeasy.jpg");
+	bgeasy.setRect(0, 0, WIDTH, HEIGHT);
+
+	Sprite bgmedium;
+	bgmedium.setTexture(R.getRender(), "../../res/bgmedium.jpg");
+	bgmedium.setRect(0, 0, WIDTH, HEIGHT);
+
+	Sprite bghard;
+	bghard.setTexture(R.getRender(), "../../res/bghard.jpg");
+	bghard.setRect(0, 0, WIDTH, HEIGHT);
 
 
 	Sprite title;
@@ -93,6 +105,10 @@ void Run() {
 	hard.setRect(WIDTH - 40 - 80, HEIGHT / 2, 100, 50);
 	hard.setSurface(font, "Hard", color);
 
+	Sprite pauseMessage;
+	pauseMessage.setRect(WIDTH/2- 100, HEIGHT / 2-50, 200, 100);
+	pauseMessage.setSurface(font, "Pause", color);
+
 	Sprite player;
 	player.setRect(0, 0, 25, 25);
 	player.setTexture(R.getRender(), "../../res/ship.png");
@@ -109,7 +125,6 @@ void Run() {
 	aux.generate(LARGE);
 	aux.getCoords();
 	
-
 	Mob u;
 	u.generate(UFO);
 	vector <Mob> mobs = {aux};
@@ -125,7 +140,7 @@ void Run() {
 			SDL_RenderCopy(R.getRender(), play.convertSurface(R.getRender()), nullptr, &play.getRect());
 			SDL_RenderCopy(R.getRender(), exit.convertSurface(R.getRender()), nullptr, &exit.getRect());
 			SDL_RenderCopy(R.getRender(), title.convertSurface(R.getRender()), nullptr, &title.getRect());
-
+			//
 
 			if (IM.onButton(play.getRect()))
 				scene = 2;
@@ -150,45 +165,47 @@ void Run() {
 			break;
 
 		case 3:
-			if (pause)
-				cout << "pause enabled" << endl;
-			else
-				//cout << "pause disabled" << endl;
-
-			counter++;
-			maxMobs = 5;
-			//cout << mobsCreated << endl;
-			SDL_RenderCopy(R.getRender(), bg.getTexture(), nullptr, &bg.getRect());
-			SDL_RenderCopyEx(R.getRender(), player.getTexture(), nullptr, &player.getRect(), S.getAngle(), &S.getPos(), S.getFlip());
-
-			if (counter % 150 == 0 && mobsCreated < maxMobs) {
-				Mob x;
-				toGenerate = rand() % 3;
-				switch (toGenerate) {	
-				case 0:
-					x.generate(SMALL);
-					x.getCoords();
-					mobs.push_back(x);
-					break;
-				case 1:
-					x.generate(MEDIUM);
-					x.getCoords();
-					mobs.push_back(x);
-					break;
-				case 2:
-					x.generate(LARGE);
-					x.getCoords();
-					mobs.push_back(x);
-					break;
-				}
-				
-				mobsCreated++;
-			}
 			
+			
+		
+			SDL_RenderCopy(R.getRender(), bgeasy.getTexture(), nullptr, &bgeasy.getRect());
+			SDL_RenderCopyEx(R.getRender(), player.getTexture(), nullptr, &player.getRect(), S.getAngle(), &S.getPos(), S.getFlip());
+			if (pause)
+				SDL_RenderCopy(R.getRender(), pauseMessage.convertSurface(R.getRender()), nullptr, &pauseMessage.getRect());
+
+			else {
+				counter++;
+				maxMobs = 5;
+				if (counter % 150 == 0 && mobsCreated < maxMobs) {
+					Mob x;
+					toGenerate = rand() % 3;
+					switch (toGenerate) {
+					case 0:
+						x.generate(SMALL);
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					case 1:
+						x.generate(MEDIUM);
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					case 2:
+						x.generate(LARGE);
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					}
+
+					mobsCreated++;
+				}
+
 				for (int i = 0; i < mobs.size(); i++) {
 					SDL_RenderCopy(R.getRender(), mobs[i].getSprite().getTexture(), nullptr, &mobs[i].a());
 					mobs[i].mobMovement();
 				}
+			}
+			
 			break;
 		case 4:
 			break;
