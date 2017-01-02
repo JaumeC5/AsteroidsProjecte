@@ -7,7 +7,7 @@
 #include "GameEngine.hh"
 int scene = 1;
 class Mob {
-
+	//
 	Sprite sp;
 	SDL_Rect rect;
 	int lvlSpeed;
