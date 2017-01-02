@@ -141,7 +141,7 @@ void Run() {
 			SDL_RenderCopy(R.getRender(), exit.convertSurface(R.getRender()), nullptr, &exit.getRect());
 			SDL_RenderCopy(R.getRender(), title.convertSurface(R.getRender()), nullptr, &title.getRect());
 			//
-
+			//
 			if (IM.onButton(play.getRect()))
 				scene = 2;
 			else if (IM.onButton(exit.getRect())) {
