@@ -4,7 +4,7 @@
 #include "Window.hh"
 
 using namespace std;
-
+//
 
 #define S SpaceShip::Instance()
 
