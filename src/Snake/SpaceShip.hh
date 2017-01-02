@@ -26,6 +26,7 @@ public:
 		static SpaceShip s;
 		return s;
 	}
+	//
 
 	SpaceShip();
 
