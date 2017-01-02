@@ -16,20 +16,35 @@ public:
 	}
 
 	void Update() {
-		
-			
-			while (SDL_PollEvent(&evnt)) { // While input events exist, unpack them and store them in the SDL_Event variable one by one
-				switch (evnt.type) { 
-				case SDL_QUIT:				isRunning = false;  break;
-				case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; break; //std::cout << playerTarget.x << std::endl;
-				case SDL_SCANCODE_SPACE: break;
-					
-					//randCoords();
-					
+
+
+		while (SDL_PollEvent(&evnt)) { // While input events exist, unpack them and store them in the SDL_Event variable one by one
+			switch (evnt.type) {
+			case SDL_QUIT:	isRunning = false;  break;
+			case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; break; //std::cout << playerTarget.x << std::endl;
+				
+
 				}
-			}
+			if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
+				bool once = false;
+				if (!pause && !once) {
+					cout << "Paused" << endl;
+					pause = true;
+					once = true;
+
+				}
+				if (pause && !once) {
+					cout << "Unpaused" << endl;
+					pause = false;
+					once = true;
+
+				}
 		}
-	
+		
+		
+		}
+
+	}
 
 	SDL_Rect getCoords() {
 		return playerTarget;
@@ -54,6 +69,8 @@ public:
 	}
 
 private:
+	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
+
 	bool isRunning = true;
 	SDL_Rect playerTarget = { 0,0,5,5 };
 	SDL_Rect r;
