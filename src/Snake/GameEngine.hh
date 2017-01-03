@@ -110,7 +110,7 @@ void Run() {
 	pauseMessage.setSurface(font, "Pause", color);
 
 	Sprite player;
-	player.setRect(0, 0, 25, 25);
+	player.setRect(WIDTH / 2, HEIGHT / 2, 25, 25);
 	player.setTexture(R.getRender(), "../../res/ship.png");
 
 	Mob s;
@@ -140,8 +140,8 @@ void Run() {
 			SDL_RenderCopy(R.getRender(), play.convertSurface(R.getRender()), nullptr, &play.getRect());
 			SDL_RenderCopy(R.getRender(), exit.convertSurface(R.getRender()), nullptr, &exit.getRect());
 			SDL_RenderCopy(R.getRender(), title.convertSurface(R.getRender()), nullptr, &title.getRect());
-			//
-			//
+		
+
 			if (IM.onButton(play.getRect()))
 				scene = 2;
 			else if (IM.onButton(exit.getRect())) {
@@ -169,7 +169,7 @@ void Run() {
 		case 3:
 
 			if (pause)
-				+SDL_RenderCopy(R.getRender(), pauseMessage.convertSurface(R.getRender()), nullptr, &pauseMessage.getRect());
+				SDL_RenderCopy(R.getRender(), pauseMessage.convertSurface(R.getRender()), nullptr, &pauseMessage.getRect());
 			else {
 				SDL_RenderCopy(R.getRender(), bgeasy.getTexture(), nullptr, &bgeasy.getRect());
 				SDL_RenderCopyEx(R.getRender(), player.getTexture(), nullptr, &player.getRect(), S.getAngle(), &S.getPos(), S.getFlip());

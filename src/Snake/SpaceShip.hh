@@ -18,23 +18,24 @@ private:
 	SDL_Event evnt;
 	bool b[4]{ 0,0,0,0 };
 
-	SDL_Point pos = {WIDTH / 2, HEIGHT / 2};
+	SDL_Point pos = { 0, 0 };
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
+
+	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
 public:
 	inline static SpaceShip &Instance() {
 		static SpaceShip s;
 		return s;
 	}
-	//
+
 
 	SpaceShip();
 
 	int rot;
 
-
 	SDL_Point getPos() { return pos; }
-	SDL_RendererFlip getFlip() { return flip;  }
+	SDL_RendererFlip getFlip() { return flip; }
 	double getAngle() { return angle; }
 
 	void rotate(const int& val) { rot = val; }
@@ -42,4 +43,3 @@ public:
 	void updatePos();
 
 };
-
