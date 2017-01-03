@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Init.hh"
 #include "rapidxml.hpp"
 #include <iostream>
 #include <fstream>
@@ -109,10 +108,10 @@ void Run() {
 	pauseMessage.setRect(WIDTH / 2 - 100, HEIGHT / 2 - 50, 200, 100);
 	pauseMessage.setSurface(font, "Pause", color);
 
-	Sprite player;
+	/*Sprite player;
 	player.setRect(WIDTH / 2, HEIGHT / 2, 25, 25);
 	player.setTexture(R.getRender(), "../../res/ship.png");
-
+	*/
 	Mob s;
 	s.generate(SMALL);
 	s.getCoords();
@@ -133,6 +132,7 @@ void Run() {
 	while (IM.on()) {
 		IM.Update();
 		S.updatePos();
+		S.generatePlayer();
 		//std::cout << scene << std::endl;
 		switch (scene) {
 		case 1:
@@ -172,7 +172,7 @@ void Run() {
 				SDL_RenderCopy(R.getRender(), pauseMessage.convertSurface(R.getRender()), nullptr, &pauseMessage.getRect());
 			else {
 				SDL_RenderCopy(R.getRender(), bgeasy.getTexture(), nullptr, &bgeasy.getRect());
-				SDL_RenderCopyEx(R.getRender(), player.getTexture(), nullptr, &player.getRect(), S.getAngle(), &S.getPos(), S.getFlip());
+				SDL_RenderCopyEx(R.getRender(), S.getPlayer().getTexture(), nullptr, &S.getPlayer().getRect(), S.getAngle(), &S.getPos(), S.getFlip());
 				if (pause)
 					SDL_RenderCopy(R.getRender(), pauseMessage.convertSurface(R.getRender()), nullptr, &pauseMessage.getRect());
 

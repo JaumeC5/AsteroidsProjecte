@@ -22,9 +22,8 @@ public:
 			switch (evnt.type) {
 			case SDL_QUIT:	isRunning = false;  break;
 			case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; break; //std::cout << playerTarget.x << std::endl;
-				
+			}
 
-				}
 			if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
 				bool once = false;
 				if (!pause && !once) {
@@ -33,18 +32,21 @@ public:
 					once = true;
 
 				}
-				if (pause && !once) {
-					cout << "Unpaused" << endl;
-					pause = false;
-					once = true;
+			if (pause && !once) {
+				cout << "Unpaused" << endl;
+				pause = false;
+				once = true;
 
 				}
-		}
-		
-		
+			}
+
 		}
 
 	}
+	
+
+
+
 
 	SDL_Rect getCoords() {
 		return playerTarget;
@@ -77,3 +79,5 @@ private:
 	SDL_Event evnt;
 	
 };
+
+

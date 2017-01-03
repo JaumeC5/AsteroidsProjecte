@@ -1,7 +1,6 @@
 #pragma once
 #include "Sprite.hh"
 #include "ID.hh"
-#include "Init.hh"
 #include "Renderer.hh"
 #include "configXML.hh"
 #include "GameEngine.hh"

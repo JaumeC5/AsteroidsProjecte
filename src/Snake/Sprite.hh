@@ -1,5 +1,13 @@
 #pragma once
-#include "Init.hh"
+
+
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <stdio.h>
+#include <iostream>
+#include <string>
+
 
 class Sprite {
 	SDL_Rect rect;
