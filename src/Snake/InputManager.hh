@@ -4,7 +4,7 @@
 #include "SpaceShip.hh"
 
 #define IM InputManager::Instance()
-bool pause = false;
+bool pause = false; //llevar de variable global
 
 class InputManager {
 

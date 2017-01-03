@@ -6,7 +6,7 @@
 #include <fstream>
 #include <vector>
 #include "rapidxml.hpp"
-#include <sstream> // faltava aixo paio
+#include <sstream> 
 #include <stdlib.h>
 #include "InputManager.hh"
 #include "Mob.hh"
