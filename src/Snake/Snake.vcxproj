@@ -186,6 +186,7 @@
     <ClCompile Include="SpaceShip.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.hh" />
     <ClInclude Include="configXML.hh" />
     <ClInclude Include="Mob.hh" />
     <ClInclude Include="GameEngine.hh" />

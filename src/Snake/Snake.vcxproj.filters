@@ -83,5 +83,8 @@
     <ClInclude Include="SpaceShip.hh">
       <Filter>Model</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.hh">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

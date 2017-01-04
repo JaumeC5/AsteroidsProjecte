@@ -13,14 +13,11 @@ class SpaceShip
 {
 
 private:
-	SDL_Event evnt;
-	
-	
 	double angle = 0.0;
 	SDL_Point pos = { 0, 0 };
 	SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
 
-	bool b[4]{ 0,0,0,0 };
+	bool b[5]{ 0,0,0,0,0 };
 
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
@@ -28,8 +25,7 @@ private:
 	SDL_Rect playerRect = { WIDTH / 2, HEIGHT / 2 };
 
 	float playerSpeed = 3;
-	float xDir;
-	float yDir;
+	float angleSpeed = 4;
 
 public:
 	inline static SpaceShip &Instance() {
@@ -47,7 +43,7 @@ public:
 	SDL_Point getPos() { return pos; }
 	SDL_RendererFlip getFlip() { return flip; }
 	double getAngle() { return angle; }
-	//void getPlayerCoords() { playerRect = player.getRect();}
+	SDL_Rect getPlayerRect() { return playerRect; }
 
 	
 	
@@ -77,10 +73,13 @@ public:
 			b[3] = true;
 			//cout << "Mov: Backward" << endl;
 		}
+		if (currentKeyStates[SDL_SCANCODE_V]) {
+			b[4] = true;
+		}
 
-
-		if (b[0]) { angle -= 3; };
-		if (b[1]) { angle += 3; };
+		//Moure tot aixo fora de l'update?
+		if (b[0]) { angle -= angleSpeed; };
+		if (b[1]) { angle += angleSpeed; };
 		
 		if (b[2]) { 
 			playerRect.x += playerSpeed * sin(angle * PI / 180.0);
@@ -91,15 +90,16 @@ public:
 			playerRect.x = playerRect.x - playerSpeed * sin(angle * PI / 180.0);
 			playerRect.y = playerRect.y + playerSpeed * cos(angle * PI / 180.0);
 		}
+		if (b[4]) { //Hiperespacio
+			playerRect.x = rand() % WIDTH;
+			playerRect.y = rand() % HEIGHT;
+		}
 
 
 		if (angle >= 360) { angle -= 360; }
 		if (angle <= -360) { angle += 360; }
 
-		b[0] = false;
-		b[1] = false;
-		b[2] = false;
-		b[3] = false;
+		b[0] = false; b[1] = false; b[2] = false; b[3] = false; b[4] = false;
 
 		cout << "X Pos: " << playerRect.x << endl;
 		cout << "Y Pos: " << playerRect.y << endl;
