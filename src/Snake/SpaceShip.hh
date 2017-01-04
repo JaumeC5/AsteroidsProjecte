@@ -70,10 +70,10 @@ public:
 		b[1] = false;
 
 		//cambiar posicion
-		if (pos.x < 0) { pos.x = WIDTH; }
-		if (pos.x > WIDTH) { pos.x = 0; }
-		if (pos.y < 0) { pos.y = HEIGHT; }
-		if (pos.y < HEIGHT) { pos.y = 0; }
+		if (player.setRect.x < 0) { pos.x = WIDTH; }
+		if (player.setRect.x > WIDTH) { pos.x = 0; }
+		if (player.setRect.y < 0) { pos.y = HEIGHT; }
+		if (player.setRect.y < HEIGHT) { pos.y = 0; }
 
 	};
 
