@@ -6,6 +6,7 @@
 #include "GameEngine.hh"
 #include "Bullet.hh"
 int scene = 1;
+int score = 0;
 class Mob {
 	//
 	Sprite m_Sp;
@@ -117,24 +118,39 @@ public:
 
 	void destroy() {
 
-		switch (m_Id) {
-		case LARGE:
-			Mob m1, m2;
-			m1.generate(MEDIUM, m_Rect.x, m_Rect.y);
-			m2.generate(MEDIUM, m_Rect.x, m_Rect.y);
+		switch (getId()) {
 
-			m_Sp.destroySprite();
+		case SMALL:
+			score += 100;
 			break;
 
+		case MEDIUM:
+			score += 50;
+			break;
 
+		case LARGE:
+			score += 20;
+			break;
+		case UFOs:
+			score += 1000;
+			break;
+		case UFOl:
+			score += 200;
+			break;
+		}
+		m_Sp.destroySprite();
+
+	}
+	void checkCollision() {
+		Sprite b = S.getPlayer(); // canviar aixo per sa bala
+
+		if (b.getRect().x >= m_Rect.x && b.getRect().x <= m_Rect.x + m_Rect.w && b.getRect().y >= m_Rect.y && b.getRect().y <= m_Rect.y + m_Rect.h) {
+			destroy();
 		}
 
 	}
-	void checkCollision(Bullet b) {
-		SDL_Rect r = b.getBulletRect();
-		if (r.x >= m_Rect.x && r.x <= m_Rect.x + m_Rect.w && r.y >= m_Rect.y && r.y <= m_Rect.y + m_Rect.h) {}
-
+	AsteroidID getId() {
+		return m_Id;
 	}
-	//
 
 };

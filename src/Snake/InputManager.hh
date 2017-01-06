@@ -8,7 +8,7 @@ bool pause = false; //llevar de variable global
 
 class InputManager {
 
-
+	bool once = false;
 
 public:
 	inline static InputManager &Instance() {
@@ -22,25 +22,26 @@ public:
 			switch (evnt.type) {
 			case SDL_QUIT:	isRunning = false;  break;
 			case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; break; //std::cout << playerTarget.x << std::endl;
-				
-			}
 
+			}
 			if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
-				bool once = false;
+
 				if (!pause && !once) {
 					cout << "Paused" << endl;
 					pause = true;
 					once = true;
 
 				}
-				if (pause && !once) {
+				else if (pause && !once) {
 					cout << "Unpaused" << endl;
 					pause = false;
 					once = true;
-
 				}
 
+
+
 			}
+
 
 		}
 
@@ -81,5 +82,6 @@ private:
 	SDL_Event evnt;
 
 };
+
 
 

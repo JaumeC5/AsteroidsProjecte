@@ -179,9 +179,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DifficultySelect.cpp" />
-    <ClCompile Include="JOC no jugable.cpp" />
-    <ClCompile Include="Le menú.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -189,7 +186,6 @@
     <ClInclude Include="configXML.hh" />
     <ClInclude Include="Mob.hh" />
     <ClInclude Include="GameEngine.hh" />
-    <ClInclude Include="Header.h" />
     <ClInclude Include="ID.hh" />
     <ClInclude Include="Init.hh" />
     <ClInclude Include="InputManager.hh" />

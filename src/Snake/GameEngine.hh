@@ -33,6 +33,7 @@ void Run() {
 	mut.lock();
 	Scene s_Menu;
 	Scene Game;
+	vector <int> props = getProps();
 
 	Sprite bgeasy;
 	bgeasy.setTexture(R.getRender(), "../../res/bgeasy.jpg");
@@ -88,7 +89,7 @@ void Run() {
 	//LOOP
 	while (IM.on()) {
 		IM.Update();
-		
+
 
 		switch (scene) {
 		case 1:
@@ -187,6 +188,7 @@ void Run() {
 				for (int i = 0; i < mobs.size(); i++) {
 					SDL_RenderCopy(R.getRender(), mobs[i].getSprite().getTexture(), nullptr, &mobs[i].a());
 					mobs[i].mobMovement();
+					mobs[i].checkCollision();
 				}
 				mut.unlock();
 			}
@@ -195,7 +197,6 @@ void Run() {
 
 		case 4:
 			Game.Draw();
-			//SDL_RenderCopy(R.getRender(), bgmedium.getTexture(), nullptr, &bgmedium.getRect());
 
 			if (pause) {
 				mut.lock();
@@ -214,6 +215,10 @@ void Run() {
 				mut.unlock();
 			}
 			else {
+				S.updatePos();
+				S.generatePlayer();
+				B.renderBullet();
+
 				mut.lock();
 				SDL_RenderCopyEx(R.getRender(), S.getPlayer().getTexture(), nullptr, &S.getPlayer().getRect(), S.getAngle(), &S.getPos(), S.getFlip());
 
@@ -247,6 +252,7 @@ void Run() {
 				for (int i = 0; i < mobs.size(); i++) {
 					SDL_RenderCopy(R.getRender(), mobs[i].getSprite().getTexture(), nullptr, &mobs[i].a());
 					mobs[i].mobMovement();
+					mobs[i].checkCollision();
 				}
 
 				mut.unlock();
@@ -255,11 +261,11 @@ void Run() {
 
 			break;
 		case 5:
-			//Game.onEntry("../../res/bghard.jpg");
 			Game.Draw();
 
-
-			//SDL_RenderCopy(R.getRender(), bghard.getTexture(), nullptr, &bghard.getRect());
+			S.updatePos();
+			S.generatePlayer();
+			B.renderBullet();
 
 			if (pause) {
 				mut.lock();
@@ -311,6 +317,7 @@ void Run() {
 				for (int i = 0; i < mobs.size(); i++) {
 					SDL_RenderCopy(R.getRender(), mobs[i].getSprite().getTexture(), nullptr, &mobs[i].a());
 					mobs[i].mobMovement();
+					mobs[i].checkCollision();
 				}
 
 				mut.unlock();
