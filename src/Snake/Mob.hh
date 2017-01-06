@@ -4,117 +4,137 @@
 #include "Renderer.hh"
 #include "configXML.hh"
 #include "GameEngine.hh"
+#include "Bullet.hh"
 int scene = 1;
 class Mob {
 	//
-	Sprite sp;
-	SDL_Rect rect;
-	int lvlSpeed;
-	int rDir = rand() % 8;
-	
+	Sprite m_Sp;
+	SDL_Rect m_Rect;
+	int m_Speed;
+	int m_RDir = rand() % 8;
+	AsteroidID m_Id;
+
 public:
-	void generate(AsteroidID type) {
-		switch (type) {
+	void generate(AsteroidID type, int x, int y) {
+		m_Id = type;
+		switch (m_Id) {
 		case SMALL:
-			sp.setRect(rand() % (rand() % -99 + (-100)) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100), 25, 25);
-			sp.setTexture(R.getRender(), "../../res/a1.png");
+			m_Sp.setRect(x, y, 25, 25);
+			m_Sp.setTexture(R.getRender(), "../../res/a1.png");
 			break;
 
 		case MEDIUM:
-			sp.setRect(rand() % (rand() % -99 + (-100)) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100), 50, 50);
-			sp.setTexture(R.getRender(), "../../res/a2.png");
+			m_Sp.setRect(x, y, 50, 50);
+			m_Sp.setTexture(R.getRender(), "../../res/a2.png");
 			break;
 
 		case LARGE:
-			sp.setRect(rand() % (rand() % -99 + (-100)) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100), 100, 100);
-			sp.setTexture(R.getRender(), "../../res/a3.png");
+			m_Sp.setRect(x, y, 100, 100);
+			m_Sp.setTexture(R.getRender(), "../../res/a3.png");
 			break;
 
 		case UFO:
-			sp.setRect(rand() % (rand() % -99 + (-100)) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100), 25, 25);
-			sp.setTexture(R.getRender(), "../../res/ufo.png");
+			m_Sp.setRect(x, y, 25, 25);
+			m_Sp.setTexture(R.getRender(), "../../res/ufo.png");
 
 		}
 	}
 
 	void getCoords() {
-		rect = sp.getRect();
+		m_Rect = m_Sp.getRect();
 	}
 
 	Sprite getSprite() {
-		return sp;
+		return m_Sp;
 	}
 
 	SDL_Rect a() {
-		return rect;
+		return m_Rect;
 	}
 
 	void mobMovement() { // FER MOURE ELS METEORITS
-		
-		
+
+
 		std::vector <int> v;
-		v = getProps(); // works
-		int speed;
+		v = getProps(); // works. Go to configXML.hh
+		int m_Speed;
 		switch (scene) {
 		case 3:
-			speed = v[1];
+			m_Speed = v[1];
 			break;
 		case 4:
-			speed = v[5];
+			m_Speed = v[5];
 			break;
 		case 5:
-			speed = v[9];
+			m_Speed = v[9];
 
 		}
 
-		if (rect.x >= WIDTH)
-			rect.x = 1;
-		else if (rect.x <= 0)
-			rect.x = WIDTH - 1;
-		else if (rect.y <= 0)
-			rect.y = HEIGHT;
-		else if (rect.y >= HEIGHT + 1)
-			rect.y = 1;
-				
-		switch (rDir) {
+		if (m_Rect.x >= WIDTH)
+			m_Rect.x = -m_Rect.w;
+		else if (m_Rect.x <= -m_Rect.w)
+			m_Rect.x = WIDTH - 1;
+		else if (m_Rect.y <= -m_Rect.h)
+			m_Rect.y = HEIGHT;
+		else if (m_Rect.y >= HEIGHT + m_Rect.h)
+			m_Rect.y = -m_Rect.h + 1;
+
+		switch (m_RDir) {
 		case 0: //up
-			rect.y -= speed;
+			m_Rect.y -= m_Speed;
 
 			break;
 		case 1: //up-right
-			rect.x += speed;
-			rect.y -= speed;				
+			m_Rect.x += m_Speed;
+			m_Rect.y -= m_Speed;
 			break;
 		case 2: //right
-			rect.x += speed;
+			m_Rect.x += m_Speed;
 			break;
 		case 3: //right-down
-			rect.x += speed;
-			rect.y += speed;
+			m_Rect.x += m_Speed;
+			m_Rect.y += m_Speed;
 			break;
 		case 4:// down
-			rect.y += speed;
+			m_Rect.y += m_Speed;
 			break;
 		case 5://down-left
-			rect.y += speed;
-			rect.x -= speed;
+			m_Rect.y += m_Speed;
+			m_Rect.x -= m_Speed;
 			break;
 		case 6://left
-			rect.x -= speed;
+			m_Rect.x -= m_Speed;
 			break;
 		case 7://left-up
-			rect.x -= speed;
-			rect.y -= speed;
+			m_Rect.x -= m_Speed;
+			m_Rect.y -= m_Speed;
 		default:
-			break;	
+			break;
 		}
-		
+
 		//cout << rect.x << " " << rect.y << endl;
 	}
 
 	void destroy() {
-		
-	}
 
+		switch (m_Id) {
+		case LARGE:
+			Mob m1, m2;
+			m1.generate(MEDIUM, m_Rect.x, m_Rect.y);
+			m2.generate(MEDIUM, m_Rect.x, m_Rect.y);
+
+			m_Sp.destroySprite();
+			break;
+
+
+		}
+
+	}
+	void checkCollision(Bullet b) {
+		SDL_Rect r = b.getBulletRect();
+		if (r.x >= m_Rect.x && r.x <= m_Rect.x + m_Rect.w && r.y >= m_Rect.y && r.y <= m_Rect.y + m_Rect.h) {}
+
+	}
+	//
 
 };

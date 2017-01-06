@@ -19,13 +19,13 @@ public:
 		rect = { x, y, w, h };
 	}
 
-	void setTexture(SDL_Renderer* renderer,char* dir) {
+	void setTexture(SDL_Renderer* renderer, char* dir) {
 		texture = IMG_LoadTexture(renderer, dir);
-		if (texture == nullptr) std::cout << "?" << std::endl;
+		if (texture == nullptr) SDL_GetError();
 
 	}
 
-	void setSurface(TTF_Font *f, char* t, SDL_Color c){
+	void setSurface(TTF_Font *f, char* t, SDL_Color c) {
 		surface = TTF_RenderText_Solid(f, t, c);
 	}
 
@@ -44,6 +44,11 @@ public:
 	}
 	SDL_Rect getRect() {
 		return rect;
+	}
+
+	void destroySprite() {
+		SDL_DestroyTexture(texture);
+		delete &rect;
 	}
 
 };

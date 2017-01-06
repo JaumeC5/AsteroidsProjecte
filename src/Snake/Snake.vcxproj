@@ -183,7 +183,6 @@
     <ClCompile Include="JOC no jugable.cpp" />
     <ClCompile Include="Le menú.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SpaceShip.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.hh" />

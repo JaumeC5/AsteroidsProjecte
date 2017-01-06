@@ -5,14 +5,14 @@
 #include <fstream>
 #include <vector>
 #include "rapidxml.hpp"
-#include <sstream> // faltava aixo paio
+#include <sstream>
 #include <stdlib.h>
 
 using namespace rapidxml;
 using namespace std;
 
 
-vector<int> getProps() // funció que agafa informació de configuració de l'arxiu xml i l'agrupa a un vector
+vector<int> getProps() // Groups up all config options in a vector and returns it
 {
 
 	int temp;
@@ -45,7 +45,7 @@ vector<int> getProps() // funció que agafa informació de configuració de l'arxiu
 
 	}
 	/*for (int i = 0; i < props.size(); i++) {
-		cout << props[i] << " ";
+	cout << props[i] << " ";
 	}*/
 	return props;
 }

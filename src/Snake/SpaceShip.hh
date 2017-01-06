@@ -7,7 +7,7 @@ using namespace std;
 #define PI 3.14159265358979323846264338327950288
 
 #define S SpaceShip::Instance()
-
+ 
 
 class SpaceShip
 {
@@ -20,6 +20,9 @@ private:
 	bool b[5]{ 0,0,0,0,0 };
 
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
+	SDL_Event evnt;
+	SDL_Rect playerTarget = { 0,0,5,5 };
+	bool toggleMouse = false;
 
 	Sprite player;
 	SDL_Rect playerRect = { WIDTH / 2, HEIGHT / 2 };
@@ -32,7 +35,6 @@ public:
 		static SpaceShip s;
 		return s;
 	}
-	SpaceShip();
 
 	void generatePlayer() {
 		player.setRect(playerRect.x, playerRect.y, 25, 25);
@@ -45,16 +47,16 @@ public:
 	double getAngle() { return angle; }
 	SDL_Rect getPlayerRect() { return playerRect; }
 
-	
-	
+
+
 
 	float moveBackward() {
-		
+
 	}
 
 	void updatePos()
 	{
-		
+
 		if (currentKeyStates[SDL_SCANCODE_LEFT]) {
 			b[0] = true;
 			//cout << "Rot: Left" << endl;
@@ -73,15 +75,34 @@ public:
 			b[3] = true;
 			//cout << "Mov: Backward" << endl;
 		}
-		if (currentKeyStates[SDL_SCANCODE_V]) {
+		/*
+		while (SDL_PollEvent(&evnt)) {
+			if ( evnt.type == SDL_KEYDOWN ){
+				switch (evnt.type) {
+					case SDL_SCANCODE_V: b[4] = true; cout << "im gay";
+				}
+			}
+		}
+		*/
+		/*if (currentKeyStates[SDL_SCANCODE_V]) {
 			b[4] = true;
 		}
+		*/
+
+		if (currentKeyStates[SDL_BUTTON_RIGHT]) { //caca perque si se pitja se canviara un parell de vegades i no una.
+			if (toggleMouse) { !toggleMouse; /* cout << "toggleMouse = Off" << endl; */ } 
+			else if (!toggleMouse) { toggleMouse; /* cout << "toggleMouse = On" << endl; */ }
+		}
+		if (toggleMouse) {
+
+		}
+
 
 		//Moure tot aixo fora de l'update?
 		if (b[0]) { angle -= angleSpeed; };
 		if (b[1]) { angle += angleSpeed; };
-		
-		if (b[2]) { 
+
+		if (b[2]) {
 			playerRect.x += playerSpeed * sin(angle * PI / 180.0);
 			playerRect.y -= playerSpeed * cos(angle * PI / 180.0);
 		}
@@ -101,18 +122,18 @@ public:
 
 		b[0] = false; b[1] = false; b[2] = false; b[3] = false; b[4] = false;
 
-		cout << "X Pos: " << playerRect.x << endl;
+		/*cout << "X Pos: " << playerRect.x << endl;
 		cout << "Y Pos: " << playerRect.y << endl;
 		cout << "Angle: " << angle << endl;
 		cout << "AngleCos: " << sin(angle * PI / 180.0) << endl;
-		cout << "AngleSin: " << cos(angle * PI / 180.0) << endl << endl;
-		
-		
+		cout << "AngleSin: " << cos(angle * PI / 180.0) << endl << endl;*/
+
+
 		if (playerRect.x < 0) { playerRect.x = WIDTH; }
 		if (playerRect.x > WIDTH) { playerRect.x = 0; }
 		if (playerRect.y < 0) { playerRect.y = HEIGHT; }
 		if (playerRect.y > HEIGHT) { playerRect.y = 0; }
-		
+
 
 	};
 

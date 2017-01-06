@@ -10,7 +10,7 @@ class Window {
 	SDL_Window *window;
 public:
 	Window(char* NAME) {
-		
+
 		window = SDL_CreateWindow(NAME,
 			SDL_WINDOWPOS_CENTERED,
 			SDL_WINDOWPOS_CENTERED,

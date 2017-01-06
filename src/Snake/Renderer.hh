@@ -20,7 +20,7 @@ public:
 	}
 
 	void setWindow(SDL_Window *w) {
-		renderer =SDL_CreateRenderer(w, -1,
+		renderer = SDL_CreateRenderer(w, -1,
 			SDL_RENDERER_ACCELERATED |
 			SDL_RENDERER_PRESENTVSYNC);
 		if (renderer == nullptr) throw SDL_GetError();

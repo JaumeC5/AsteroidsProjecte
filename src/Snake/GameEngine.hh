@@ -4,51 +4,19 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "rapidxml.hpp"
 #include <sstream> 
 #include <stdlib.h>
 #include "InputManager.hh"
 #include "Mob.hh"
 #include "SpaceShip.hh"
+#include "Scene.hh"
+#include <thread>
+#include <mutex>
 
-
-void getConfig() {
-
+std::mutex mut;
 using namespace rapidxml;
 using namespace std;
-int temp;
-vector <int> props;
-
-xml_document <>doc;
-ifstream file("config.xml");
-stringstream buffer;
-buffer << file.rdbuf();
-file.close();
-string content(buffer.str());
-doc.parse<0>(&content[0]);
-
-xml_node<> *root = doc.first_node();
-
-for (xml_node <> *node = root->first_node("Level"); node; node = node->next_sibling()) {
-	xml_attribute <> *attr = node->first_attribute();
-	cout << attr->value() << endl;
-
-	for (xml_node <> *n = node->first_node(); n; n = n->next_sibling()) {
-		cout << n->name() << ": " << n->value() << endl;
-		temp = atoi(n->value());
-		props.push_back(temp);
-
-
-	}
-	cout << endl;
-
-
-}
-for (int i = 0; i < props.size(); i++) {
-	cout << props[i] << " ";
-}
-
-}
+vector <Mob> mobs;
 
 void Run() {
 	init();
@@ -62,10 +30,9 @@ void Run() {
 	Window window("Asteroids");
 
 	R.setWindow(window.getWindow());
-
-	Sprite bg;
-	bg.setTexture(R.getRender(), "../../res/bgmenu.jpg");
-	bg.setRect(0, 0, WIDTH, HEIGHT);
+	mut.lock();
+	Scene s_Menu;
+	Scene Game;
 
 	Sprite bgeasy;
 	bgeasy.setTexture(R.getRender(), "../../res/bgeasy.jpg");
@@ -105,42 +72,32 @@ void Run() {
 	hard.setSurface(font, "Hard", color);
 
 	Sprite pauseMessage;
-	pauseMessage.setRect(WIDTH / 2 - 100, HEIGHT / 2 - 50, 200, 100);
+	pauseMessage.setRect(WIDTH / 2 - 50, 100, 100, 50);
 	pauseMessage.setSurface(font, "Pause", color);
 
-	/*Sprite player;
-	player.setRect(WIDTH / 2, HEIGHT / 2, 25, 25);
-	player.setTexture(R.getRender(), "../../res/ship.png");
-	*/
-	Mob s;
-	s.generate(SMALL);
-	s.getCoords();
+	Sprite continueButton;
+	continueButton.setRect(WIDTH / 2 - 115, HEIGHT / 2 - 50, 230, 100);
+	continueButton.setSurface(font, "Continue", color);
 
-	Mob m;
-	m.generate(MEDIUM);
-	m.getCoords();
+	Sprite exitButton;
+	exitButton.setRect(WIDTH / 2 - 115, HEIGHT / 2 + 50, 150, 100);
+	exitButton.setSurface(font, "Exit", color);
+	mut.unlock();
 
-	Mob aux;
-	aux.generate(LARGE);
-	aux.getCoords();
-
-	Mob u;
-	u.generate(UFO);
-	vector <Mob> mobs = { aux };
 
 	//LOOP
 	while (IM.on()) {
 		IM.Update();
-		S.updatePos();
-		S.generatePlayer();
-		//std::cout << scene << std::endl;
+		
+
 		switch (scene) {
 		case 1:
-			SDL_RenderCopy(R.getRender(), bg.getTexture(), nullptr, &bg.getRect());
+			s_Menu.onEntry("../../res/bgmenu.jpg");
+			s_Menu.Draw();
 			SDL_RenderCopy(R.getRender(), play.convertSurface(R.getRender()), nullptr, &play.getRect());
 			SDL_RenderCopy(R.getRender(), exit.convertSurface(R.getRender()), nullptr, &exit.getRect());
 			SDL_RenderCopy(R.getRender(), title.convertSurface(R.getRender()), nullptr, &title.getRect());
-		
+
 
 			if (IM.onButton(play.getRect()))
 				scene = 2;
@@ -151,71 +108,215 @@ void Run() {
 			}
 			break;
 		case 2:
-			SDL_RenderCopy(R.getRender(), bg.getTexture(), nullptr, &bg.getRect());
+			s_Menu.Draw();
 			SDL_RenderCopy(R.getRender(), easy.convertSurface(R.getRender()), nullptr, &easy.getRect());
 			SDL_RenderCopy(R.getRender(), medium.convertSurface(R.getRender()), nullptr, &medium.getRect());
 			SDL_RenderCopy(R.getRender(), hard.convertSurface(R.getRender()), nullptr, &hard.getRect());
 
-			if (IM.onButton(easy.getRect()))
+			if (IM.onButton(easy.getRect())) {
+				Game.onEntry("../../res/bgeasy.jpg");
 				scene = 3;
-			if (IM.onButton(medium.getRect()))
+			}
+			if (IM.onButton(medium.getRect())) {
+				Game.onEntry("../../res/bgmedium.jpg");
 				scene = 4;
-			if (IM.onButton(hard.getRect()))
-				scene = 5;
-			break;
-			
+			}
 
+			if (IM.onButton(hard.getRect())) {
+				Game.onEntry("../../res/bghard.jpg");
+				scene = 5;
+			}
+			break;
 
 		case 3:
 
-			if (pause)
+			Game.Draw();
+
+			if (pause) {
+				mut.lock();
 				SDL_RenderCopy(R.getRender(), pauseMessage.convertSurface(R.getRender()), nullptr, &pauseMessage.getRect());
-			else {
-				SDL_RenderCopy(R.getRender(), bgeasy.getTexture(), nullptr, &bgeasy.getRect());
-				SDL_RenderCopyEx(R.getRender(), S.getPlayer().getTexture(), nullptr, &S.getPlayer().getRect(), S.getAngle(), &S.getPos(), S.getFlip());
-				if (pause)
-					SDL_RenderCopy(R.getRender(), pauseMessage.convertSurface(R.getRender()), nullptr, &pauseMessage.getRect());
+				SDL_RenderCopy(R.getRender(), continueButton.convertSurface(R.getRender()), nullptr, &continueButton.getRect());
+				SDL_RenderCopy(R.getRender(), exitButton.convertSurface(R.getRender()), nullptr, &exitButton.getRect());
 
-				else {
-					counter++;
-					maxMobs = 5;
-					if (counter % 150 == 0 && mobsCreated < maxMobs) {
-						Mob x;
-						toGenerate = rand() % 3;
-						switch (toGenerate) {
-						case 0:
-							x.generate(SMALL);
-							x.getCoords();
-							mobs.push_back(x);
-							break;
-						case 1:
-							x.generate(MEDIUM);
-							x.getCoords();
-							mobs.push_back(x);
-							break;
-						case 2:
-							x.generate(LARGE);
-							x.getCoords();
-							mobs.push_back(x);
-							break;
-						}
-
-						mobsCreated++;
-					}
-
-					for (int i = 0; i < mobs.size(); i++) {
-						SDL_RenderCopy(R.getRender(), mobs[i].getSprite().getTexture(), nullptr, &mobs[i].a());
-						mobs[i].mobMovement();
-					}
+				if (IM.onButton(continueButton.getRect()))
+					pause = false;
+				if (IM.onButton(exitButton.getRect())) {
+					scene = 1;
+					pause = false;
+					mobsCreated = 0;
+					mobs.clear();
+				}
+				mut.unlock();
 			}
 
-			
+			else {
+				S.updatePos();
+				S.generatePlayer();
+				B.renderBullet();
+
+				mut.lock();
+				SDL_RenderCopyEx(R.getRender(), S.getPlayer().getTexture(), nullptr, &S.getPlayer().getRect(), S.getAngle(), &S.getPos(), S.getFlip());
+
+				counter++;
+				maxMobs = 5;
+				if (counter % 150 == 0 && mobsCreated < maxMobs) {
+					Mob x;
+					toGenerate = rand() % 3;
+					switch (toGenerate) {
+					case 0:
+						x.generate(SMALL, rand() % -99 + (-100) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100));
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					case 1:
+						x.generate(MEDIUM, rand() % -99 + (-100) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100));
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					case 2:
+						x.generate(LARGE, rand() % -99 + (-100) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100));
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					}
+
+					mobsCreated++;
+					std::cout << "wow" << endl;
+				}
+
+				for (int i = 0; i < mobs.size(); i++) {
+					SDL_RenderCopy(R.getRender(), mobs[i].getSprite().getTexture(), nullptr, &mobs[i].a());
+					mobs[i].mobMovement();
+				}
+				mut.unlock();
 			}
 
 			break;
+
 		case 4:
+			Game.Draw();
+			//SDL_RenderCopy(R.getRender(), bgmedium.getTexture(), nullptr, &bgmedium.getRect());
+
+			if (pause) {
+				mut.lock();
+				SDL_RenderCopy(R.getRender(), pauseMessage.convertSurface(R.getRender()), nullptr, &pauseMessage.getRect());
+				SDL_RenderCopy(R.getRender(), continueButton.convertSurface(R.getRender()), nullptr, &continueButton.getRect());
+				SDL_RenderCopy(R.getRender(), exitButton.convertSurface(R.getRender()), nullptr, &exitButton.getRect());
+
+				if (IM.onButton(continueButton.getRect()))
+					pause = false;
+				if (IM.onButton(exitButton.getRect())) {
+					scene = 1;
+					pause = false;
+					mobsCreated = 0;
+					mobs.clear();
+				}
+				mut.unlock();
+			}
+			else {
+				mut.lock();
+				SDL_RenderCopyEx(R.getRender(), S.getPlayer().getTexture(), nullptr, &S.getPlayer().getRect(), S.getAngle(), &S.getPos(), S.getFlip());
+
+				counter++;
+				maxMobs = 7;
+				if (counter % 120 == 0 && mobsCreated < maxMobs) {
+					Mob x;
+					toGenerate = rand() % 3;
+					switch (toGenerate) {
+					case 0:
+						x.generate(SMALL, rand() % -99 + (-100) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100));
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					case 1:
+						x.generate(MEDIUM, rand() % -99 + (-100) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100));
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					case 2:
+						x.generate(LARGE, rand() % -99 + (-100) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100));
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					}
+
+					mobsCreated++;
+					std::cout << "wow" << endl;
+				}
+
+				for (int i = 0; i < mobs.size(); i++) {
+					SDL_RenderCopy(R.getRender(), mobs[i].getSprite().getTexture(), nullptr, &mobs[i].a());
+					mobs[i].mobMovement();
+				}
+
+				mut.unlock();
+
+			}
+
 			break;
 		case 5:
+			//Game.onEntry("../../res/bghard.jpg");
+			Game.Draw();
+
+
+			//SDL_RenderCopy(R.getRender(), bghard.getTexture(), nullptr, &bghard.getRect());
+
+			if (pause) {
+				mut.lock();
+				SDL_RenderCopy(R.getRender(), pauseMessage.convertSurface(R.getRender()), nullptr, &pauseMessage.getRect());
+				SDL_RenderCopy(R.getRender(), continueButton.convertSurface(R.getRender()), nullptr, &continueButton.getRect());
+				SDL_RenderCopy(R.getRender(), exitButton.convertSurface(R.getRender()), nullptr, &exitButton.getRect());
+
+				if (IM.onButton(continueButton.getRect()))
+					pause = false;
+				if (IM.onButton(exitButton.getRect())) {
+					scene = 1;
+					pause = false;
+					mobsCreated = 0;
+					mobs.clear();
+				}
+				mut.unlock();
+			}
+			else {
+				mut.lock();
+				SDL_RenderCopyEx(R.getRender(), S.getPlayer().getTexture(), nullptr, &S.getPlayer().getRect(), S.getAngle(), &S.getPos(), S.getFlip());
+
+				counter++;
+				maxMobs = 5;
+				if (counter % 90 == 0 && mobsCreated < maxMobs) {
+					Mob x;
+					toGenerate = rand() % 3;
+					switch (toGenerate) {
+					case 0:
+						x.generate(SMALL, rand() % -99 + (-100) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100));
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					case 1:
+						x.generate(MEDIUM, rand() % -99 + (-100) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100));
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					case 2:
+						x.generate(LARGE, rand() % -99 + (-100) + (rand() % WIDTH + 100 + 99), rand() % -99 + (-100));
+						x.getCoords();
+						mobs.push_back(x);
+						break;
+					}
+
+					mobsCreated++;
+					std::cout << "wow" << endl;
+				}
+
+				for (int i = 0; i < mobs.size(); i++) {
+					SDL_RenderCopy(R.getRender(), mobs[i].getSprite().getTexture(), nullptr, &mobs[i].a());
+					mobs[i].mobMovement();
+				}
+
+				mut.unlock();
+
+			}
+
 			break;
 
 		}

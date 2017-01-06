@@ -7,10 +7,10 @@
 #include <string>
 
 using namespace std;
-//
+
 void init() {
 
-	
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) throw SDL_GetError();
 	const Uint8 imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
 	if (!(IMG_Init(imgFlags) & imgFlags)) throw IMG_GetError();
