@@ -47,8 +47,11 @@ public:
 	}
 
 	void destroySprite() {
-		SDL_DestroyTexture(texture);
-		delete &rect;
+		texture = nullptr;
+		rect.x = 0;
+		rect.y = 0;
+		rect.h = 0;
+		rect.w = 0;
 	}
-
+ 
 };

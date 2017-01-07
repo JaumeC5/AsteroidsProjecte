@@ -6,7 +6,8 @@
 #include "Mob.hh"
 
 int main(int argc, char* args[]) {
-	Run();
+	GameEngine g;
+	g.Run();
 		return 0;
 	}
 

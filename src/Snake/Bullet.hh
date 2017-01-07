@@ -9,7 +9,7 @@ private:
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
 	Sprite bullet;
-	SDL_Rect bulletRect = { S.getPlayerRect().x, S.getPlayerRect().y };
+	SDL_Rect bulletRect;
 
 	float bulletVel = 10;
 
@@ -19,22 +19,34 @@ public:
 		static Bullet b;
 		return b;
 	}
+	
 
 	SDL_Rect getBulletRect() { return bulletRect; }
+	Sprite getBullet() { return bullet; }
 
 	void generateBullet() {
-			bullet.setRect(bulletRect.x, bulletRect.y, 10, 10);
+			bullet.setRect(bulletRect.x, bulletRect.y, 5, 5);
 			bullet.setTexture(R.getRender(), "../../res/bullet.png");
 	}
 
 	void renderBullet() {
-		if (currentKeyStates[SDL_SCANCODE_SPACE]) {
-			cout << "im gay";
-			//SDL_RenderCopy(R.getRender(), bullet.getTexture() , nullptr, &getBulletRect());
-		}
+		
+		bulletRect.x = S.getPlayerRect().x;
+		bulletRect.y = S.getPlayerRect().y;
+	
+		bulletRect.x += 10;
+		bulletRect.y += 10;
+		
+	}
+	
+	
+	void destroyBullet() {
+
 	}
 
-
+	void getPositions() {
+		cout << bulletRect.x << " " << bulletRect.y << endl;
+	}
 
 	
 };

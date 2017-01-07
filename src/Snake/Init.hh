@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include"SDL_mixer.h"
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -17,5 +18,9 @@ void init() {
 	if (TTF_Init() != 0) printf("problema");
 	TTF_Font * font = TTF_OpenFont("../../res/ka1.ttf", 35);
 	if (font == NULL) printf("%s", TTF_GetError());
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+	}
 }
 

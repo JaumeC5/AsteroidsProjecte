@@ -2,6 +2,7 @@
 #include "Init.hh"
 #include "GameEngine.hh"
 #include "SpaceShip.hh"
+#include "Bullet.hh"
 
 #define IM InputManager::Instance()
 bool pause = false; //llevar de variable global
@@ -9,6 +10,8 @@ bool pause = false; //llevar de variable global
 class InputManager {
 
 	bool once = false;
+	bool once2 = false;
+	bool shot = false;
 
 public:
 	inline static InputManager &Instance() {
@@ -22,24 +25,34 @@ public:
 			switch (evnt.type) {
 			case SDL_QUIT:	isRunning = false;  break;
 			case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; break; //std::cout << playerTarget.x << std::endl;
+			case SDL_KEYDOWN:
+				if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
 
+					if (!pause && !once) {
+						cout << "Paused" << endl;
+						pause = true;
+						once = true;
+
+					}
+					else if (pause && !once) {
+						cout << "Unpaused" << endl;
+						pause = false;
+						once = true;
+					}
+					once = false;
+
+					
 			}
-			if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
-
-				if (!pause && !once) {
-					cout << "Paused" << endl;
-					pause = true;
-					once = true;
-
+			if (currentKeyStates[SDL_SCANCODE_SPACE]) {
+				if (!shot) {
+					cout << "PEW" << endl; // generar bales aquí
+					//B.renderBullet();
+					shot = true;
 				}
-				else if (pause && !once) {
-					cout << "Unpaused" << endl;
-					pause = false;
-					once = true;
+				shot = false;
 				}
-
-
-
+			
+				break;
 			}
 
 
@@ -48,7 +61,7 @@ public:
 	}
 
 
-
+	
 
 
 	SDL_Rect getCoords() {
@@ -75,7 +88,7 @@ public:
 
 private:
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-
+	
 	bool isRunning = true;
 	SDL_Rect playerTarget = { 0,0,5,5 };
 	SDL_Rect r;

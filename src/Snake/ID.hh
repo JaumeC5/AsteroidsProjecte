@@ -1,6 +1,6 @@
 #pragma once
 
 enum AsteroidID {
-	SMALL, MEDIUM, LARGE, UFO, UFOs, UFOl
+	SMALL, MEDIUM, LARGE, UFOs, UFOl
 };
 

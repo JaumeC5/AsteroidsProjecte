@@ -2,6 +2,7 @@
 
 #include "Sprite.hh"
 #include "Renderer.hh"
+#include "InputManager.hh"
 using namespace std;
 
 #define PI 3.14159265358979323846264338327950288
@@ -34,6 +35,10 @@ public:
 	inline static SpaceShip &Instance() {
 		static SpaceShip s;
 		return s;
+	}
+
+	bool getBool() {
+		return b[4];
 	}
 
 	void generatePlayer() {
@@ -75,12 +80,14 @@ public:
 			b[3] = true;
 			//cout << "Mov: Backward" << endl;
 		}
-		/*
-		while (SDL_PollEvent(&evnt)) {
+
+		
+		
+		/*while (SDL_PollEvent(&evnt)) {
 			if ( evnt.type == SDL_KEYDOWN ){
-				switch (evnt.type) {
-					case SDL_SCANCODE_V: b[4] = true; cout << "im gay";
-				}
+				
+					if (currentKeyStates[SDL_SCANCODE_V]) b[4] = true; cout << "im gay";
+				
 			}
 		}
 		*/
@@ -90,8 +97,8 @@ public:
 		*/
 
 		if (currentKeyStates[SDL_BUTTON_RIGHT]) { //caca perque si se pitja se canviara un parell de vegades i no una.
-			if (toggleMouse) { !toggleMouse; /* cout << "toggleMouse = Off" << endl; */ } 
-			else if (!toggleMouse) { toggleMouse; /* cout << "toggleMouse = On" << endl; */ }
+			if (toggleMouse) { toggleMouse = false; /* cout << "toggleMouse = Off" << endl; */ } 
+			else if (!toggleMouse) { toggleMouse = true; /* cout << "toggleMouse = On" << endl; */ }
 		}
 		if (toggleMouse) {
 
@@ -129,10 +136,14 @@ public:
 		cout << "AngleSin: " << cos(angle * PI / 180.0) << endl << endl;*/
 
 
-		if (playerRect.x < 0) { playerRect.x = WIDTH; }
-		if (playerRect.x > WIDTH) { playerRect.x = 0; }
-		if (playerRect.y < 0) { playerRect.y = HEIGHT; }
-		if (playerRect.y > HEIGHT) { playerRect.y = 0; }
+		if (playerRect.x >= WIDTH)
+			playerRect.x = -playerRect.w;
+		else if (playerRect.x <= -playerRect.w)
+			playerRect.x = WIDTH - 1;
+		else if (playerRect.y <= -playerRect.h)
+			playerRect.y = HEIGHT;
+		else if (playerRect.y >= HEIGHT + playerRect.h)
+			playerRect.y = -playerRect.h + 1;
 
 
 	};

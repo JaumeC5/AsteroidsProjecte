@@ -34,9 +34,14 @@ public:
 			m_Sp.setTexture(R.getRender(), "../../res/a3.png");
 			break;
 
-		case UFO:
+		case UFOl:
+			m_Sp.setRect(x, y, 50, 50);
+			m_Sp.setTexture(R.getRender(), "../../res/ufo.png");
+			break;
+		case UFOs:
 			m_Sp.setRect(x, y, 25, 25);
 			m_Sp.setTexture(R.getRender(), "../../res/ufo.png");
+			break;
 
 		}
 	}
@@ -54,7 +59,6 @@ public:
 	}
 
 	void mobMovement() { // FER MOURE ELS METEORITS
-
 
 		std::vector <int> v;
 		v = getProps(); // works. Go to configXML.hh
@@ -147,7 +151,16 @@ public:
 		if (b.getRect().x >= m_Rect.x && b.getRect().x <= m_Rect.x + m_Rect.w && b.getRect().y >= m_Rect.y && b.getRect().y <= m_Rect.y + m_Rect.h) {
 			destroy();
 		}
-
+/*
+		if (m_Rect.x >= WIDTH)
+			m_Rect.x = -m_Rect.w;
+		else if (m_Rect.x <= -m_Rect.w)
+			m_Rect.x = WIDTH - 1;
+		else if (m_Rect.y <= -m_Rect.h)
+			m_Rect.y = HEIGHT;
+		else if (m_Rect.y >= HEIGHT + m_Rect.h)
+			m_Rect.y = -m_Rect.h + 1;
+			*/
 	}
 	AsteroidID getId() {
 		return m_Id;
