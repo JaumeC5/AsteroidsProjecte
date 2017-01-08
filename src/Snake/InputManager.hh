@@ -13,6 +13,8 @@ class InputManager {
 	bool once2 = false;
 	bool shot = false;
 
+	vector<Bullet> bulletV;
+
 public:
 	inline static InputManager &Instance() {
 		static InputManager inputManager;
@@ -41,22 +43,68 @@ public:
 					}
 					once = false;
 
-					
-			}
+					break;
+			/*
+}
 			if (currentKeyStates[SDL_SCANCODE_SPACE]) {
 				if (!shot) {
 					cout << "PEW" << endl; // generar bales aquí
 					//B.renderBullet();
 					shot = true;
 				}
-				shot = false;
+				shot = false;*/
 				}
 			
-				break;
 			}
 
+		}
+		Bullet newBullet;
+		B.generateBullet();
+		B.updateBullet();
+		
+		if (currentKeyStates[SDL_SCANCODE_SPACE]) {
+			cout << "new Bullet" << endl;
+			bulletV.push_back(newBullet);
+			cout << "Bullet counter: " << bulletV.size() << endl;
+			
+		
+		}
+		SDL_RenderCopyEx(R.getRender(), B.getBullet().getTexture(), nullptr, &B.getBulletRect(), S.getAngle(), &S.getPos(), S.getFlip());
+		B.updateBullet();
+		//int bulletNum = bulletV.size();
+		//SDL_RenderCopyEx(R.getRender(), bulletV[bulletNum].getBullet().getTexture(), nullptr, &bulletV[bulletNum].getBulletRect(), S.getAngle(), &S.getPos(), S.getFlip());
+		for (int i = 0; i > bulletV.size(); i++) {
+			SDL_RenderCopyEx(R.getRender(), bulletV[i].getBullet().getTexture(), nullptr, &bulletV[i].getBulletRect(), S.getAngle(), &S.getPos(), S.getFlip());
+			bulletV[i].updateBullet();
+			cout << "getBulletRect()" << B.getBulletRect().x << endl;
+			cout << "Bullet nº" << i << "Pos x" << bulletV[i].getBulletRect().x << endl;
+			cout << "Bullet nº" << i << "Pos y" << bulletV[i].getBulletRect().y << endl;
+		}
+
+		if (bulletV.size() > 2) {
+			//cout << "Bala 1 Xpos: " << bulletV[1].getBulletRect().x << endl;
+			//cout << "Bala 1 Ypos: " << bulletV[1].getBulletRect().y << endl;
+		}
+
+		if (bulletV.size() > 30) { //si n'hi ha mes de 30, elimina el primer i mou els elements del vector -1
+			bulletV.erase(bulletV.begin());
+			for (int i = 1; i < bulletV.size(); i++) {
+					bulletV[i] = bulletV[i - 1];
+			}
+		}
+
+		/*
+		for (int i = 1; i < bulletV.size(); i++) {
+
+			if (bulletV[i].getBulletRect().x > WIDTH || bulletV[i].getBulletRect().x < 0 ||
+			bulletV[i].getBulletRect().y > HEIGHT || bulletV[i].getBulletRect().y < 0 ||
+			bulletV.size() < 40) {
+
+			bulletV.erase(bulletV.begin() + i - 1);
+			cout << "rip bullet" << endl;
 
 		}
+		}*/
 
 	}
 

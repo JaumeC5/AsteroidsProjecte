@@ -22,7 +22,6 @@ using namespace std;
 
 class GameEngine {
 vector <Mob> mobs;
-vector<Bullet> bulletV;
 Mix_Music *music = NULL;
 Mix_Chunk *bullet = NULL;
 Mix_Chunk *meteor = NULL;
@@ -150,8 +149,8 @@ public:
 			case 3:
 
 				Game.Draw();
-				B.generateBullet();
-				B.getPositions();
+				
+
 				if (pause) {
 					mut.lock();
 					SDL_RenderCopy(R.getRender(), pauseMessage.convertSurface(R.getRender()), nullptr, &pauseMessage.getRect());
@@ -172,11 +171,12 @@ public:
 				else {
 					S.updatePos();
 					S.generatePlayer();
-					B.renderBullet();
 					
 					mut.lock();
 					SDL_RenderCopyEx(R.getRender(), S.getPlayer().getTexture(), nullptr, &S.getPlayer().getRect(), S.getAngle(), &S.getPos(), S.getFlip());
-
+				
+				
+				
 					counter++;
 					maxMobs = 5;
 					if (counter % 150 == 0 && mobsCreated < maxMobs) {
@@ -210,9 +210,10 @@ public:
 						mobs[i].checkCollision();
 					}
 
-					B.renderBullet();
-
 					mut.unlock();
+
+					
+
 				}
 
 				break;
@@ -239,7 +240,6 @@ public:
 				else {
 					S.updatePos();
 					S.generatePlayer();
-					B.renderBullet();
 
 					mut.lock();
 					SDL_RenderCopyEx(R.getRender(), S.getPlayer().getTexture(), nullptr, &S.getPlayer().getRect(), S.getAngle(), &S.getPos(), S.getFlip());
@@ -287,7 +287,6 @@ public:
 
 				S.updatePos();
 				S.generatePlayer();
-				B.renderBullet();
 
 				if (pause) {
 					mut.lock();
@@ -344,19 +343,6 @@ public:
 
 					mut.unlock();
 					
-
-					Bullet newBullet;
-					B.renderBullet();
-					if (currentKeyStates[SDL_SCANCODE_SPACE]) {
-						cout << "new Bullet" << endl;
-						bulletV.push_back(newBullet);
-						for (int i = 0; i < bulletV.size(); i++) {
-							SDL_RenderCopy(R.getRender(), bulletV[i].getBullet().getTexture(), nullptr, &bulletV[i].getBulletRect());
-						}
-					}
-					if (bulletV.size() >= 30) {
-						bulletV.pop_back();
-					}
 
 				}
 

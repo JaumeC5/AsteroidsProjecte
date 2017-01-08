@@ -21,32 +21,24 @@ public:
 	}
 	
 
+	
+
+	void updateBullet() {
+
+		bulletRect.x = S.getPlayerRect().x;
+		bulletRect.y = S.getPlayerRect().y;
+	
+		bulletRect.x += 1000;
+		bulletRect.y += 1000;
+
+	}
 	SDL_Rect getBulletRect() { return bulletRect; }
 	Sprite getBullet() { return bullet; }
 
 	void generateBullet() {
-			bullet.setRect(bulletRect.x, bulletRect.y, 5, 5);
-			bullet.setTexture(R.getRender(), "../../res/bullet.png");
-	}
-
-	void renderBullet() {
-		
-		bulletRect.x = S.getPlayerRect().x;
-		bulletRect.y = S.getPlayerRect().y;
-	
-		bulletRect.x += 10;
-		bulletRect.y += 10;
-		
+		bullet.setRect(bulletRect.x, bulletRect.y, 25, 25);
+		bullet.setTexture(R.getRender(), "../../res/bullet.png");
 	}
 	
-	
-	void destroyBullet() {
-
-	}
-
-	void getPositions() {
-		cout << bulletRect.x << " " << bulletRect.y << endl;
-	}
-
 	
 };

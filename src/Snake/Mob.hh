@@ -151,16 +151,7 @@ public:
 		if (b.getRect().x >= m_Rect.x && b.getRect().x <= m_Rect.x + m_Rect.w && b.getRect().y >= m_Rect.y && b.getRect().y <= m_Rect.y + m_Rect.h) {
 			destroy();
 		}
-/*
-		if (m_Rect.x >= WIDTH)
-			m_Rect.x = -m_Rect.w;
-		else if (m_Rect.x <= -m_Rect.w)
-			m_Rect.x = WIDTH - 1;
-		else if (m_Rect.y <= -m_Rect.h)
-			m_Rect.y = HEIGHT;
-		else if (m_Rect.y >= HEIGHT + m_Rect.h)
-			m_Rect.y = -m_Rect.h + 1;
-			*/
+
 	}
 	AsteroidID getId() {
 		return m_Id;
