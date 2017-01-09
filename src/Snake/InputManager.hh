@@ -14,6 +14,10 @@ class InputManager {
 	bool shot = false;
 
 	vector<Bullet> bulletV;
+	vector<SDL_Rect> bulletPosV;
+
+	Bullet newBullet;
+	SDL_Rect bulletPos;
 
 public:
 	inline static InputManager &Instance() {
@@ -58,7 +62,8 @@ public:
 			}
 
 		}
-		Bullet newBullet;
+		
+		
 		B.generateBullet();
 		B.updateBullet();
 		
@@ -66,10 +71,13 @@ public:
 			cout << "new Bullet" << endl;
 			bulletV.push_back(newBullet);
 			cout << "Bullet counter: " << bulletV.size() << endl;
-			
+		
+			//B.getBulletRect().x = S.getPlayerRect().x;
+			//                                                                                                                                                                                             
+			//B.getBulletRect().y = S.getPlayerRect().y;
 		
 		}
-		SDL_RenderCopyEx(R.getRender(), B.getBullet().getTexture(), nullptr, &B.getBulletRect(), S.getAngle(), &S.getPos(), S.getFlip());
+		SDL_RenderCopyEx(R.getRender(), B.getBullet().getTexture(), nullptr, &bulletPos, S.getAngle(), &S.getPos(), S.getFlip());
 		B.updateBullet();
 		//int bulletNum = bulletV.size();
 		//SDL_RenderCopyEx(R.getRender(), bulletV[bulletNum].getBullet().getTexture(), nullptr, &bulletV[bulletNum].getBulletRect(), S.getAngle(), &S.getPos(), S.getFlip());
@@ -133,6 +141,8 @@ public:
 		r.x = rand() % WIDTH;
 		r.y = rand() % HEIGHT;
 	}
+
+	SDL_Rect getBulletPos() { return bulletPos; }
 
 private:
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);

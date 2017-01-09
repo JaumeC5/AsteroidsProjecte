@@ -16,7 +16,7 @@ class SpaceShip
 
 private:
 	double angle = 0.0;
-	SDL_Point pos = { 0, 0 };
+	SDL_Point pos = { 12, 12 };
 	SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
 
 	bool b[5]{ 0,0,0,0,0 };
@@ -100,7 +100,7 @@ public:
 		if (currentKeyStates[SDL_BUTTON_RIGHT]) { //caca perque si se pitja se canviara un parell de vegades i no una.
 			if (toggleMouse) { toggleMouse = false; /* cout << "toggleMouse = Off" << endl; */ } 
 			else if (!toggleMouse) { toggleMouse = true; /* cout << "toggleMouse = On" << endl; */ }
-		}
+		}  
 		if (toggleMouse) {
 
 		}

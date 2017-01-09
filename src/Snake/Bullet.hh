@@ -24,9 +24,6 @@ public:
 	
 
 	void updateBullet() {
-
-		bulletRect.x = S.getPlayerRect().x;
-		bulletRect.y = S.getPlayerRect().y;
 	
 		bulletRect.x += 1000;
 		bulletRect.y += 1000;
