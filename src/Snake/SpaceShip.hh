@@ -2,6 +2,7 @@
 
 #include "Sprite.hh"
 #include "Renderer.hh"
+#include "InputManager.hh"
 
 
 using namespace std;
@@ -63,21 +64,21 @@ public:
 	void updatePos()
 	{
 
-		if (currentKeyStates[SDL_SCANCODE_LEFT]) {
+		if (IM.getLeft() == true) {
 			b[0] = true;
 			//cout << "Rot: Left" << endl;
 		}
-		if (currentKeyStates[SDL_SCANCODE_RIGHT]) {
+		if (IM.getRight() == true) {
 			b[1] = true;
 			//cout << "Rot: Right" << endl;
 		}
 
-		if (currentKeyStates[SDL_SCANCODE_UP]) {
+		if (IM.getUp() == true) {
 			b[2] = true;
 			//cout << "Mov: Forward" << endl;
 		}
 
-		if (currentKeyStates[SDL_SCANCODE_DOWN]) {
+		if (IM.getDown() == true) {
 			b[3] = true;
 			//cout << "Mov: Backward" << endl;
 		}
@@ -97,7 +98,7 @@ public:
 		}
 		*/
 
-		if (currentKeyStates[SDL_BUTTON_RIGHT]) { //caca perque si se pitja se canviara un parell de vegades i no una.
+		if (IM.getRightMouse() == true) { //caca perque si se pitja se canviara un parell de vegades i no una.
 			if (toggleMouse) { toggleMouse = false; /* cout << "toggleMouse = Off" << endl; */ } 
 			else if (!toggleMouse) { toggleMouse = true; /* cout << "toggleMouse = On" << endl; */ }
 		}  

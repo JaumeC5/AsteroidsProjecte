@@ -14,6 +14,8 @@
 #include <mutex>
 #include "SDL_mixer.h"
 #include "Bullet.hh"
+#include "Pause.hh"
+#include "BulletUsage.hh"
 
 
 std::mutex mut;
@@ -104,7 +106,7 @@ public:
 
 
 		//LOOP
-		while (IM.on()) {
+		while (IM.isOn()) {
 			IM.Update();
 
 
@@ -151,7 +153,7 @@ public:
 				Game.Draw();
 				
 
-				if (pause) {
+				if (P.getPause()) {
 					mut.lock();
 					SDL_RenderCopy(R.getRender(), pauseMessage.convertSurface(R.getRender()), nullptr, &pauseMessage.getRect());
 					SDL_RenderCopy(R.getRender(), continueButton.convertSurface(R.getRender()), nullptr, &continueButton.getRect());
@@ -171,6 +173,7 @@ public:
 				else {
 					S.updatePos();
 					S.generatePlayer();
+					BU.drawBullet();
 					
 					mut.lock();
 					SDL_RenderCopyEx(R.getRender(), S.getPlayer().getTexture(), nullptr, &S.getPlayer().getRect(), S.getAngle(), &S.getPos(), S.getFlip());
