@@ -23,7 +23,7 @@ void Bullet2::setBullet() {
 
 }
 void Bullet2::getPos() {
-	cout << m_sp.getRect().x << " " << m_sp.getRect().y << endl;
+	//cout << m_sp.getRect().x << " " << m_sp.getRect().y << endl;
 }
 
 void Bullet2::renderBullet(SDL_Renderer *r) {
