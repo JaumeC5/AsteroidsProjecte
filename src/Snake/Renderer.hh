@@ -3,7 +3,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <iostream>
-
+int scene = 1;
 #define R Renderer::Instance()
 
 class Renderer {

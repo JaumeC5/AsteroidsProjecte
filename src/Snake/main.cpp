@@ -6,12 +6,14 @@
 #include "Mob.hh"
 
 int main(int argc, char* args[]) {
+	srand(time(NULL));
+
 	GameEngine g;
 	g.Run();
-		return 0;
-	}
+
+	return 0;
+}
 
 
 
 
-	

@@ -183,14 +183,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.hh" />
-    <ClInclude Include="BulletUsage.hh" />
+    <ClInclude Include="Bullet2.hh" />
     <ClInclude Include="configXML.hh" />
     <ClInclude Include="Mob.hh" />
     <ClInclude Include="GameEngine.hh" />
     <ClInclude Include="ID.hh" />
     <ClInclude Include="Init.hh" />
     <ClInclude Include="InputManager.hh" />
-    <ClInclude Include="Pause.hh" />
+    <ClInclude Include="Ranking.hh" />
     <ClInclude Include="Renderer.hh" />
     <ClInclude Include="Scene.hh" />
     <ClInclude Include="SpaceShip.hh" />

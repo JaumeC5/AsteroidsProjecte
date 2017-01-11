@@ -1,18 +1,20 @@
 #pragma once
 #include "Init.hh"
-
+#include "GameEngine.hh"
+#include "SpaceShip.hh"
+#include "Bullet.hh"
+#include "Bullet2.hh"
 
 #define IM InputManager::Instance()
- //llevar de variable global
-
+//llevar de variable global
+bool pause = false;
 class InputManager {
-private:
-	bool ESCAPE, DOWN, LEFT, RIGHT, UP, SPACE, V, RIGHTMOUSE;
-	bool isRunning = true;
-	SDL_Event evnt;
-	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-
-	SDL_Rect playerTarget = { 0,0,5,5 };
+	bool renderText = false;
+	bool once = false;
+	bool once2 = false;
+	bool shot = false;
+	//string text = "Testest";
+	Bullet2 bb;
 
 public:
 	inline static InputManager &Instance() {
@@ -20,42 +22,17 @@ public:
 		return inputManager;
 	}
 
-	void Update() {
+	void Update();
 
-		while (SDL_PollEvent(&evnt)) {
-			switch (evnt.type) {
 
-			case SDL_QUIT: isRunning = false; break;
-			case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; break;
-
-			case SDL_KEYDOWN:
-
-				if (currentKeyStates[SDL_SCANCODE_ESCAPE]) { ESCAPE = true; }
-				if (currentKeyStates[SDL_SCANCODE_V]) { V = true; }
-				break;
-
-			case SDL_KEYUP:
-
-				if (currentKeyStates[SDL_SCANCODE_ESCAPE]) { ESCAPE = false; }
-				if (currentKeyStates[SDL_SCANCODE_V]) { V = false; }
-				break;
-
-			}
-			if (currentKeyStates[SDL_SCANCODE_UP]) { UP = true; }
-			else { UP = false; }
-			if (currentKeyStates[SDL_SCANCODE_LEFT]) { LEFT = true; }
-			else { LEFT = false; }
-			if (currentKeyStates[SDL_SCANCODE_RIGHT]) { RIGHT = true; }
-			else { RIGHT = false; }
-			if (currentKeyStates[SDL_SCANCODE_DOWN]) { DOWN = true; }
-			else { DOWN = false; }
-			if (currentKeyStates[SDL_SCANCODE_SPACE]) { SPACE = true; }
-			else { SPACE = false; }
-			if (currentKeyStates[SDL_BUTTON_RIGHT]) { RIGHTMOUSE = true; }
-			else { RIGHTMOUSE = false; }
-
-		}
+	SDL_Rect getCoords() {
+		return playerTarget;
 	}
+
+	bool on() {
+		return isRunning;
+	}
+
 
 	bool onButton(SDL_Rect rect) {
 		if (playerTarget.x >= rect.x && playerTarget.x <= rect.x + rect.w && playerTarget.y >= rect.y && playerTarget.y <= rect.y + rect.h && evnt.type == SDL_MOUSEBUTTONUP)
@@ -64,19 +41,85 @@ public:
 			return false;
 	}
 
-	bool isOn() {
-		return isRunning;
+	void randCoords(Sprite s) {
+		r = s.getRect();
+		r.x = rand() % WIDTH;
+		r.y = rand() % HEIGHT;
 	}
 
-	bool getEscape() { return ESCAPE; }
-	bool getUp() { return UP; }
-	bool getLeft() { return LEFT; }
-	bool getRight() { return RIGHT; }
-	bool getDown() { return DOWN; }
-	bool getSpace() { return SPACE; }
-	bool getV() { return V; }
-	bool getRightMouse() { return  RIGHTMOUSE; }
+	bool shoot();
+
+private:
+	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
+	int counter;
+	bool isRunning = true;
+	SDL_Rect playerTarget = { 0,0,5,5 };
+	SDL_Rect r;
+	SDL_Rect r2;
+	SDL_Event evnt;
+
+
 };
 
 
+void InputManager::Update() {
+	while (SDL_PollEvent(&evnt)) { // While input events exist, unpack them and store them in the SDL_Event variable one by one
+								   //counter++;
+								   //cout << counter << endl;
+		switch (evnt.type) {
+		case SDL_QUIT:	isRunning = false;  break;
+		case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; break; //std::cout << playerTarget.x << std::endl;
+		case SDL_KEYDOWN:
 
+			if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
+
+				if (!pause && !once) {
+					cout << "Paused" << endl;
+					pause = true;
+					once = true;
+
+				}
+				else if (pause && !once) {
+					cout << "Unpaused" << endl;
+					pause = false;
+					once = true;
+				}
+				once = false;
+
+
+			}
+
+
+
+		}
+		if (currentKeyStates[SDL_SCANCODE_SPACE]) {
+
+			if (!shot) {
+				//	cout << "SI" << endl;
+
+				shot = true;
+			}
+			shot = false;
+
+		}
+
+		break;
+	}
+
+
+}
+
+bool InputManager::shoot() {
+	cout << shot << endl;
+	if (!shot) {
+
+
+		shot = true;
+	}
+	if (shot) {
+		//cout << true << endl;
+
+		shot = false;
+	}
+	return shot;
+}

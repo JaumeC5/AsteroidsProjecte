@@ -6,8 +6,8 @@
 
 class Scene {
 	Sprite m_b;
-	int m_score;
-	Sprite m_points;
+	//int m_score;
+	//Sprite m_points;
 
 
 public:

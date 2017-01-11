@@ -3,14 +3,14 @@
 #include "Sprite.hh"
 #include "Renderer.hh"
 #include "InputManager.hh"
-
+#include "configXML.hh"
 
 using namespace std;
 
 #define PI 3.14159265358979323846264338327950288
 
 #define S SpaceShip::Instance()
- 
+
 
 class SpaceShip
 {
@@ -19,9 +19,9 @@ private:
 	double angle = 0.0;
 	SDL_Point pos = { 12, 12 };
 	SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
-
+	vector <int> v = getProps();
 	bool b[5]{ 0,0,0,0,0 };
-
+	int hp = 3;
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 	SDL_Event evnt;
 	SDL_Rect playerTarget = { 0,0,5,5 };
@@ -41,6 +41,19 @@ public:
 
 	bool getBool() {
 		return b[4];
+	}
+
+	void setHp() {
+		if (scene == 3)
+			hp *= v[0];
+		else if (scene == 4)
+			hp *= v[4];
+		else if (scene == 5)
+			hp *= v[8];
+	}
+
+	int getHp() {
+		return hp;
 	}
 
 	void generatePlayer() {
@@ -64,44 +77,44 @@ public:
 	void updatePos()
 	{
 
-		if (IM.getLeft() == true) {
+		if (currentKeyStates[SDL_SCANCODE_LEFT]) {
 			b[0] = true;
 			//cout << "Rot: Left" << endl;
 		}
-		if (IM.getRight() == true) {
+		if (currentKeyStates[SDL_SCANCODE_RIGHT]) {
 			b[1] = true;
 			//cout << "Rot: Right" << endl;
 		}
 
-		if (IM.getUp() == true) {
+		if (currentKeyStates[SDL_SCANCODE_UP]) {
 			b[2] = true;
 			//cout << "Mov: Forward" << endl;
 		}
 
-		if (IM.getDown() == true) {
+		if (currentKeyStates[SDL_SCANCODE_DOWN]) {
 			b[3] = true;
 			//cout << "Mov: Backward" << endl;
 		}
 
-		
-		
+
+
 		/*while (SDL_PollEvent(&evnt)) {
-			if ( evnt.type == SDL_KEYDOWN ){
-				
-					if (currentKeyStates[SDL_SCANCODE_V]) b[4] = true; cout << "im gay";
-				
-			}
+		if ( evnt.type == SDL_KEYDOWN ){
+
+		if (currentKeyStates[SDL_SCANCODE_V]) b[4] = true; cout << "im gay";
+
+		}
 		}
 		*/
-		/*if (currentKeyStates[SDL_SCANCODE_V]) {
+		if (currentKeyStates[SDL_SCANCODE_V]) {
 			b[4] = true;
 		}
-		*/
 
-		if (IM.getRightMouse() == true) { //caca perque si se pitja se canviara un parell de vegades i no una.
-			if (toggleMouse) { toggleMouse = false; /* cout << "toggleMouse = Off" << endl; */ } 
+
+		if (currentKeyStates[SDL_BUTTON_RIGHT]) { //caca perque si se pitja se canviara un parell de vegades i no una.
+			if (toggleMouse) { toggleMouse = false; /* cout << "toggleMouse = Off" << endl; */ }
 			else if (!toggleMouse) { toggleMouse = true; /* cout << "toggleMouse = On" << endl; */ }
-		}  
+		}
 		if (toggleMouse) {
 
 		}
@@ -138,14 +151,15 @@ public:
 		cout << "AngleSin: " << cos(angle * PI / 180.0) << endl << endl;*/
 
 
+
 		if (playerRect.x >= WIDTH)
 			playerRect.x = -playerRect.w;
 		else if (playerRect.x <= -playerRect.w)
-			playerRect.x = WIDTH - 1;
+			playerRect.x = WIDTH;
 		else if (playerRect.y <= -playerRect.h)
 			playerRect.y = HEIGHT;
 		else if (playerRect.y >= HEIGHT + playerRect.h)
-			playerRect.y = -playerRect.h + 1;
+			playerRect.y = -playerRect.h;
 
 
 	};

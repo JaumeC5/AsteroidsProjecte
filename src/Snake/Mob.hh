@@ -5,15 +5,19 @@
 #include "configXML.hh"
 #include "GameEngine.hh"
 #include "Bullet.hh"
-int scene = 1;
+
 int score = 0;
 class Mob {
-	//
 	Sprite m_Sp;
+	Sprite m_Sub1;
+	Sprite m_Sub2;
 	SDL_Rect m_Rect;
 	int m_Speed;
 	int m_RDir = rand() % 8;
 	AsteroidID m_Id;
+	bool kaput = false;
+	int count = 150;
+
 
 public:
 	void generate(AsteroidID type, int x, int y) {
@@ -54,11 +58,13 @@ public:
 		return m_Sp;
 	}
 
-	SDL_Rect a() {
+	SDL_Rect a() { // the most useful and powerful function
 		return m_Rect;
 	}
 
 	void mobMovement() { // FER MOURE ELS METEORITS
+
+
 
 		std::vector <int> v;
 		v = getProps(); // works. Go to configXML.hh
@@ -75,14 +81,24 @@ public:
 
 		}
 
-		if (m_Rect.x >= WIDTH)
-			m_Rect.x = -m_Rect.w;
-		else if (m_Rect.x <= -m_Rect.w)
-			m_Rect.x = WIDTH - 1;
-		else if (m_Rect.y <= -m_Rect.h)
-			m_Rect.y = HEIGHT;
-		else if (m_Rect.y >= HEIGHT + m_Rect.h)
-			m_Rect.y = -m_Rect.h + 1;
+		if (m_Rect.x >= WIDTH - 10)
+			m_Rect.x = -m_Rect.w + 10;
+		else if (m_Rect.x <= -m_Rect.w + 9)
+			m_Rect.x = WIDTH - 11;
+		else if (m_Rect.y <= -m_Rect.h + 9)
+			m_Rect.y = HEIGHT - 9;
+		else if (m_Rect.y >= HEIGHT + m_Rect.h - 10)
+			m_Rect.y = -m_Rect.h + 10;
+
+		if (m_Id == UFOl || m_Id == UFOs) {
+			count++;
+			if (count >= 150) {
+				m_RDir = rand() % 8;
+				count = 0;
+			}
+		}
+
+
 
 		switch (m_RDir) {
 		case 0: //up
@@ -117,6 +133,8 @@ public:
 			break;
 		}
 
+
+
 		//cout << rect.x << " " << rect.y << endl;
 	}
 
@@ -126,30 +144,36 @@ public:
 
 		case SMALL:
 			score += 100;
+			cout << "ouch" << endl;
 			break;
 
 		case MEDIUM:
 			score += 50;
+			cout << "Medium ouch" << endl;
 			break;
 
 		case LARGE:
 			score += 20;
+
 			break;
 		case UFOs:
 			score += 1000;
 			break;
 		case UFOl:
+
 			score += 200;
 			break;
 		}
-		m_Sp.destroySprite();
-
 	}
-	void checkCollision() {
-		Sprite b = S.getPlayer(); // canviar aixo per sa bala
+	bool boom() {
+		return kaput;
+	}
+	void checkCollision(vector <Mob> m) {
+		Sprite b = S.getPlayer(); // canviar aixo per sa bala // deixar això també per restar vides
 
 		if (b.getRect().x >= m_Rect.x && b.getRect().x <= m_Rect.x + m_Rect.w && b.getRect().y >= m_Rect.y && b.getRect().y <= m_Rect.y + m_Rect.h) {
-			destroy();
+			kaput = true;
+			//destroy(m);
 		}
 
 	}
