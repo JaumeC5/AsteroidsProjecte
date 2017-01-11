@@ -71,10 +71,10 @@
     <ClInclude Include="Bullet.hh">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet2.hh">
+    <ClInclude Include="Ranking.hh">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="Ranking.hh">
+    <ClInclude Include="Bullet2.hh">
       <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>
