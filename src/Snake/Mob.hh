@@ -1,3 +1,4 @@
+
 #pragma once
 #include "Sprite.hh"
 #include "ID.hh"
@@ -17,7 +18,7 @@ class Mob {
 	AsteroidID m_Id;
 	bool kaput = false;
 	int count = 150;
-
+	
 
 public:
 	void generate(AsteroidID type, int x, int y) {
@@ -83,8 +84,8 @@ public:
 
 		if (m_Rect.x >= WIDTH - 10)
 			m_Rect.x = -m_Rect.w + 10;
-		else if (m_Rect.x <= -m_Rect.w + 9)
-			m_Rect.x = WIDTH - 11;
+		else if (m_Rect.x <= -m_Rect.w +9)
+			m_Rect.x = WIDTH -11;
 		else if (m_Rect.y <= -m_Rect.h + 9)
 			m_Rect.y = HEIGHT - 9;
 		else if (m_Rect.y >= HEIGHT + m_Rect.h - 10)
@@ -99,7 +100,7 @@ public:
 		}
 
 
-
+		
 		switch (m_RDir) {
 		case 0: //up
 			m_Rect.y -= m_Speed;
@@ -132,8 +133,8 @@ public:
 		default:
 			break;
 		}
-
-
+		
+		
 
 		//cout << rect.x << " " << rect.y << endl;
 	}

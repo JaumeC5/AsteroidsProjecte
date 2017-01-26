@@ -5,7 +5,7 @@
 
 		<HPmultiplier>5</HPmultiplier>
 		<enemySpeed>1</enemySpeed>
-		<numEnemies>1</numEnemies>
+		<numEnemies>5</numEnemies>
 		<enemyIncrement>1</enemyIncrement>
 
     </Level>
@@ -13,14 +13,14 @@
     <Level name="Medium">
         <HPmultiplier>3</HPmultiplier>
 		<enemySpeed>2</enemySpeed>
-		<numEnemies>2</numEnemies>
+		<numEnemies>5</numEnemies>
 		<enemyIncrement>2</enemyIncrement>
     </Level>
 	
     <Level name="Hard">
         <HPmultiplier>1</HPmultiplier>
 		<enemySpeed>3</enemySpeed>
-		<numEnemies>3</numEnemies>
+		<numEnemies>5</numEnemies>
 		<enemyIncrement>4</enemyIncrement>
     </Level>
 	

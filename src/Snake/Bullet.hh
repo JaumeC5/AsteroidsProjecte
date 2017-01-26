@@ -21,15 +21,15 @@ public:
 		static Bullet b;
 		return b;
 	}
-
+	
 
 	SDL_Rect getBulletRect() { return bulletRect; }
 	Sprite getBullet() { return bullet; }
 
 	void generateBullet() {
-		bullet.setRect(bulletRect.x, bulletRect.y, 5, 5);
-		bullet.setTexture(R.getRender(), "../../res/bullet.png");
-		//bullets[0] = bullet;
+			bullet.setRect(bulletRect.x, bulletRect.y, 5, 5);
+			bullet.setTexture(R.getRender(), "../../res/bullet.png");
+			//bullets[0] = bullet;
 	}
 
 	void renderBullet() {
@@ -48,13 +48,13 @@ public:
 
 		}
 
-
-
-
-
+		
+		
+	
+		
 	}
-
-
+	
+	
 	void destroyBullet() {
 
 	}
@@ -63,5 +63,5 @@ public:
 		//cout << bulletRect.x << " " << bulletRect.y << endl;
 	}
 
-
+	
 };

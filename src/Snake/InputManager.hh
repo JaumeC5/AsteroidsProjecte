@@ -4,25 +4,29 @@
 #include "SpaceShip.hh"
 #include "Bullet.hh"
 #include "Bullet2.hh"
+#include "chrono"
+#include "time.h"
 
 #define IM InputManager::Instance()
-//llevar de variable global
+ //llevar de variable global
 bool pause = false;
 class InputManager {
 	bool renderText = false;
 	bool once = false;
 	bool once2 = false;
-	bool shot = false;
+	//bool shot = false;
 	//string text = "Testest";
-	Bullet2 bb;
-
+	//Bullet2 bb;
+	int time = 0;
+	int counter = 0;
+	vector <Bullet2> b2;
 public:
 	inline static InputManager &Instance() {
 		static InputManager inputManager;
 		return inputManager;
 	}
 
-	void Update();
+	void Update(vector <Bullet2> b2);
 
 
 	SDL_Rect getCoords() {
@@ -51,7 +55,7 @@ public:
 
 private:
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-	int counter;
+	//int counter;
 	bool isRunning = true;
 	SDL_Rect playerTarget = { 0,0,5,5 };
 	SDL_Rect r;
@@ -62,10 +66,18 @@ private:
 };
 
 
-void InputManager::Update() {
+void InputManager::Update(vector <Bullet2> b) {
+	b2 = b;
+	double time_counter = 0;
+	const int NUM_SECONDS = 1;
+	clock_t this_time = clock();
+	clock_t last_time = this_time;
+	 // contador de bales
+
 	while (SDL_PollEvent(&evnt)) { // While input events exist, unpack them and store them in the SDL_Event variable one by one
-								   //counter++;
-								   //cout << counter << endl;
+		//counter++;
+		//cout << "Time " << time << endl;
+
 		switch (evnt.type) {
 		case SDL_QUIT:	isRunning = false;  break;
 		case SDL_MOUSEMOTION: playerTarget.x = evnt.motion.x; playerTarget.y = evnt.motion.y; break; //std::cout << playerTarget.x << std::endl;
@@ -94,32 +106,29 @@ void InputManager::Update() {
 		}
 		if (currentKeyStates[SDL_SCANCODE_SPACE]) {
 
-			if (!shot) {
-				//	cout << "SI" << endl;
+			time++;
 
-				shot = true;
+			if (time == 5) { // funciona
+				b2[counter].active = true;
+				cout << "bala " << counter << " " <<b2[counter].active << endl;
+				counter++;
+				if (counter >= 10)
+					counter = 0;
+				time = 0;
 			}
-			shot = false;
-
 		}
 
 		break;
 	}
 
-
+	for (int i = 0; i < 10; i++) {
+		b2[i].getCoords();
+		b2[i].setRect();
+		b2[i].shot();
+		SDL_RenderCopy(R.getRender(), b2[i].getSprite().getTexture(), nullptr, &b2[i].getR());
+	}
 }
 
 bool InputManager::shoot() {
-	cout << shot << endl;
-	if (!shot) {
-
-
-		shot = true;
-	}
-	if (shot) {
-		//cout << true << endl;
-
-		shot = false;
-	}
-	return shot;
+	return true;
 }

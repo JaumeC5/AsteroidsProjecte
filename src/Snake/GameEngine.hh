@@ -24,7 +24,6 @@ using namespace std;
 
 class GameEngine {
 	vector <Mob> mobs;
-	vector<Bullet2>bullets;
 	Mix_Music *music = NULL;
 	Mix_Chunk *bullet = NULL;
 	Mix_Chunk *meteor = NULL;
@@ -141,26 +140,24 @@ void GameEngine::Run() {
 	gameOver.setRect(WIDTH / 2 - 115, HEIGHT / 2 - 50, 230, 100);
 	gameOver.setSurface(font, "Game Over", color);
 
-
+	Sprite bullet;
+	bullet.setTexture(R.getRender(), "../../res/bullet.png");
 	//thread th;
 
-
-
-
+	
+	
+	
 	mut.unlock();
 
 
 	//LOOP
 	while (IM.on()) {
-
-		Bullet2 b;
-		if (bullets.size() >= 0 && bullets.size() < 10) {
-
-			bullets.push_back(b);
-		}
-		bullets[0].getPos();
+		
+		Bullet2 b(bullet);
+		vector <Bullet2> bullets(10, b);
 
 
+		
 		//cout << bullets.size() << endl;
 		switch (scene) {
 		case 1:
@@ -184,7 +181,7 @@ void GameEngine::Run() {
 
 
 			}
-
+			
 			break;
 		case 2:
 			s_Menu.Draw();
@@ -206,8 +203,8 @@ void GameEngine::Run() {
 				Game.onEntry("../../res/bghard.jpg");
 				scene = 5;
 			}
-
-
+		
+	
 			break;
 
 		case 3:
@@ -226,11 +223,11 @@ void GameEngine::Run() {
 					//cout << score << endl;
 					RK.check();
 					RK.updateRank(score);
-
+					
 					scene = 1;
 					pause = false;
 					mobsCreated = 0;
-
+					
 					score = 0;
 					mobs.clear();
 				}
@@ -241,22 +238,15 @@ void GameEngine::Run() {
 				S.updatePos();
 				S.generatePlayer();
 				S.setHp();
-				for (int i = 0; i < 10; i++) {
-					bullets[i].setBullet();
-
-					if (IM.shoot()) {
-						bullets[i].renderBullet(R.getRender());
-					}
-
-				}
+				
 				//cout << S.getHp() << endl;
-
+				
 				_itoa_s(score, buffer, 10);
 				sc.setSurface(font, buffer, color);
 
-				b.renderBullet(R.getRender());
+				
 				mut.lock();
-
+				
 				SDL_RenderCopyEx(R.getRender(), S.getPlayer().getTexture(), nullptr, &S.getPlayer().getRect(), S.getAngle(), &S.getPos(), S.getFlip());
 				SDL_RenderCopy(R.getRender(), sc.convertSurface(R.getRender()), nullptr, &sc.getRect());
 				counter++;
@@ -299,7 +289,7 @@ void GameEngine::Run() {
 				//b.renderBullet();
 				for (int i = 0; i < mobs.size(); i++) {
 					SDL_RenderCopy(R.getRender(), mobs[i].getSprite().getTexture(), nullptr, &mobs[i].a());
-
+					
 					mobs[i].mobMovement();
 					mobs[i].checkCollision(mobs);
 					if (mobs[i].boom()) {
@@ -580,8 +570,8 @@ void GameEngine::Run() {
 
 			break;
 			//
-
-
+				
+			
 
 			break;
 		case 6:
@@ -590,7 +580,7 @@ void GameEngine::Run() {
 			if (IM.onButton(back.getRect()))
 				scene = 1;
 
-
+			
 			RK.print(font, color);
 			RK.check();
 
@@ -602,7 +592,7 @@ void GameEngine::Run() {
 
 
 		}
-		IM.Update();
+		IM.Update(bullets);
 		SDL_RenderPresent(R.getRender());
 	}
 	IMG_Quit();

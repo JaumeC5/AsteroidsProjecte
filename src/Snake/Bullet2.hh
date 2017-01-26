@@ -1,5 +1,6 @@
 #pragma once
 #include "SpaceShip.hh"
+#include "Sprite.hh"
 
 SDL_Rect bulletRect;
 
@@ -7,29 +8,47 @@ class Bullet2 {
 	Sprite m_sp;
 	SDL_Rect r;
 	int speed = 6;
-	bool shot = false;
+	
 
 public:
-	void setBullet();
-	void getPos();
-	SDL_Rect getRect();
-	void renderBullet(SDL_Renderer *r);
+	bool active;
+	int x;
+	int y;
+	//int xShot;
+	//int yShot;
+	Bullet2(Sprite z) {
+		m_sp = z;
+	}
+	void getCoords() {
+		if (!active)
+			x = S.getPlayerRect().x + 12; y = S.getPlayerRect().y + 12;
+	}
+	void shot() {
+		if (active) {
+			/*bool bulletShot = true;
+			if (bulletShot = true) {
+				xShot = S.getPlayerRect().x + 12;
+				yShot = S.getPlayerRect().y + 12;
+				bulletShot = false;
+			}*/
+			x += 20;
+		}
+		
 
+		
+	}
+	Sprite getSprite() {
+		return m_sp;
+	}
+	void setRect() {
+		r = { x, y, 3, 3 };
+		if (x >= WIDTH || x <= 0 || y >= HEIGHT || y <= 0)
+			active = false;
+	}
+	SDL_Rect getR() {
+		return r;
+	}
+
+	
 };
 
-void Bullet2::setBullet() {
-	m_sp.setRect(S.getPlayerRect().x + 11, S.getPlayerRect().y + 11, 3, 3);
-	m_sp.setTexture(R.getRender(), "../../res/bullet.png");
-
-}
-void Bullet2::getPos() {
-	//cout << m_sp.getRect().x << " " << m_sp.getRect().y << endl;
-}
-
-void Bullet2::renderBullet(SDL_Renderer *r) {
-	SDL_RenderCopy(r, m_sp.getTexture(), nullptr, &m_sp.getRect());
-}
-
-SDL_Rect Bullet2::getRect() {
-	return m_sp.getRect();
-}

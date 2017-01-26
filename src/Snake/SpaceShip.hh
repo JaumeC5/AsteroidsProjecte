@@ -10,7 +10,7 @@ using namespace std;
 #define PI 3.14159265358979323846264338327950288
 
 #define S SpaceShip::Instance()
-
+ 
 
 class SpaceShip
 {
@@ -29,7 +29,7 @@ private:
 
 	Sprite player;
 	SDL_Rect playerRect = { WIDTH / 2, HEIGHT / 2 };
-
+	
 	float playerSpeed = 3;
 	float angleSpeed = 4;
 
@@ -96,23 +96,23 @@ public:
 			//cout << "Mov: Backward" << endl;
 		}
 
-
-
+		
+		
 		/*while (SDL_PollEvent(&evnt)) {
-		if ( evnt.type == SDL_KEYDOWN ){
-
-		if (currentKeyStates[SDL_SCANCODE_V]) b[4] = true; cout << "im gay";
-
-		}
+			if ( evnt.type == SDL_KEYDOWN ){
+				
+					if (currentKeyStates[SDL_SCANCODE_V]) b[4] = true; cout << "im gay";
+				
+			}
 		}
 		*/
 		if (currentKeyStates[SDL_SCANCODE_V]) {
 			b[4] = true;
 		}
-
+		
 
 		if (currentKeyStates[SDL_BUTTON_RIGHT]) { //caca perque si se pitja se canviara un parell de vegades i no una.
-			if (toggleMouse) { toggleMouse = false; /* cout << "toggleMouse = Off" << endl; */ }
+			if (toggleMouse) { toggleMouse = false; /* cout << "toggleMouse = Off" << endl; */ } 
 			else if (!toggleMouse) { toggleMouse = true; /* cout << "toggleMouse = On" << endl; */ }
 		}
 		if (toggleMouse) {
@@ -154,7 +154,7 @@ public:
 
 		if (playerRect.x >= WIDTH)
 			playerRect.x = -playerRect.w;
-		else if (playerRect.x <= -playerRect.w)
+		else if (playerRect.x <= -playerRect.w )
 			playerRect.x = WIDTH;
 		else if (playerRect.y <= -playerRect.h)
 			playerRect.y = HEIGHT;
