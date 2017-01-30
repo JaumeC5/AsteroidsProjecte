@@ -1,0 +1,32 @@
+﻿Compilación iniciada a las 30/01/2017 21:58:05.
+     1>Proyecto "C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\src\Snake\Snake.vcxproj" en el nodo 2 (Build destinos).
+     1>ClCompile:
+         D:\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /IC:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\\dep\inc /ZI /nologo /W3 /WX- /sdl /Od /D _SCL_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\\tmp\Asteroids_ToniFerrari_JaumeCompanyx64Debug\\" /Fd"C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\\tmp\Asteroids_ToniFerrari_JaumeCompanyx64Debug\vc140.pdb" /Gd /TP /errorReport:prompt Asteroids_ToniFerrari_Jaume_Company.cpp
+         Asteroids_ToniFerrari_Jaume_Company.cpp
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\spaceship.hh(90): warning C4244: '+=': conversión de 'double' a 'int'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\spaceship.hh(91): warning C4244: '-=': conversión de 'double' a 'int'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\spaceship.hh(95): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\spaceship.hh(96): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\bullet2.hh(36): warning C4244: '+=': conversión de 'double' a 'int'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\bullet2.hh(37): warning C4244: '-=': conversión de 'double' a 'int'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\bullet2.hh(43): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\ufobullet.h(47): warning C4244: '+=': conversión de 'double' a 'int'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\ufobullet.h(48): warning C4244: '-=': conversión de 'double' a 'int'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\ufobullet.h(57): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\ufobullet.h(61): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\ufobullet.h(66): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\ufobullet.h(72): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\ufobullet.h(76): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+     1>c:\users\jaume\desktop\asteroidsprojecte_tferrari_jcompany\src\snake\asteroids_toniferrari_jaume_company.cpp(9): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+       Link:
+         D:\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\\bin\x64Debug\Asteroids_ToniFerrari_JaumeCompany.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\\dep\lib\x64 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib SDL2.lib SDL2main.lib SDL2_image.lib SDL2_ttf.lib SDL2_mixer.lib SDL2_net.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\\bin\x64Debug\Asteroids_ToniFerrari_JaumeCompany.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\\bin\x64Debug\Asteroids_ToniFerrari_JaumeCompany.lib" /MACHINE:X64 C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\\tmp\Asteroids_ToniFerrari_JaumeCompanyx64Debug\Asteroids_ToniFerrari_Jaume_Company.obj
+         Snake.vcxproj -> C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\\bin\x64Debug\Asteroids_ToniFerrari_JaumeCompany.exe
+       PostBuildEvent:
+         xcopy /d /y "C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\\dep\dll\x64\*.dll" "C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\bin\x64Debug\"
+         :VCEnd
+         0 archivo(s) copiado(s)
+     1>Compilación del proyecto terminada "C:\Users\Jaume\Desktop\AsteroidsProjecte_TFerrari_JCompany\src\Snake\Snake.vcxproj" (Build destinos).
+
+Compilación correcta.
+
+Tiempo transcurrido 00:00:01.15
