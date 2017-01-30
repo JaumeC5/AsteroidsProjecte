@@ -1,54 +1,64 @@
 #pragma once
 #include "SpaceShip.hh"
-#include "Sprite.hh"
-
-SDL_Rect bulletRect;
+#include "SDL.h"
 
 class Bullet2 {
-	Sprite m_sp;
-	SDL_Rect r;
-	int speed = 6;
-	
-
-public:
-	bool active;
 	int x;
 	int y;
-	//int xShot;
-	//int yShot;
-	Bullet2(Sprite z) {
-		m_sp = z;
+	int bulletSpeed = 8;
+	Sprite sp;
+	float bulletAngle;
+public:
+	bool alive;
+	bool meteorHit;
+	Bullet2(Sprite sp2) {
+		sp = sp2;
 	}
-	void getCoords() {
-		if (!active)
-			x = S.getPlayerRect().x + 12; y = S.getPlayerRect().y + 12;
-	}
-	void shot() {
-		if (active) {
-			/*bool bulletShot = true;
-			if (bulletShot = true) {
-				xShot = S.getPlayerRect().x + 12;
-				yShot = S.getPlayerRect().y + 12;
-				bulletShot = false;
-			}*/
-			x += 20;
-		}
-		
-
-		
-	}
-	Sprite getSprite() {
-		return m_sp;
-	}
-	void setRect() {
-		r = { x, y, 3, 3 };
-		if (x >= WIDTH || x <= 0 || y >= HEIGHT || y <= 0)
-			active = false;
-	}
-	SDL_Rect getR() {
-		return r;
-	}
-
-	
+	SDL_Rect getPos();
+	void setLimits();
+	void setBullet();
+	void draw();
+	void update();
+	void shoot(int, int);
 };
 
+SDL_Rect Bullet2::getPos() {
+	return sp.getRect();
+}
+
+void Bullet2::setBullet() {
+	sp.setRect( x, y, 2, 2 ); 
+}
+
+void Bullet2::update() { //moure objectes
+	//cout << x << ' ' << y << endl;
+	if (alive) {
+		x += bulletSpeed * sin(bulletAngle * PI / 180.0);
+		y -= bulletSpeed * cos(bulletAngle * PI / 180.0);
+	}
+
+	if(!alive) {
+		x = S.getPlayerRect().x+12;
+		y = S.getPlayerRect().y+12;
+		bulletAngle = S.getAngle();
+	}
+		
+
+	
+}
+
+void Bullet2::draw() {
+	if(alive)
+		SDL_RenderCopy(R.getRender(), sp.getTexture(), nullptr, &sp.getRect());
+}
+
+void Bullet2::shoot(int s, int c) { // son ses poscions de sa nave. que no fan falta al final
+
+	alive = true;
+	
+}
+
+void Bullet2::setLimits() {
+	if (x >= WIDTH || x <= 0 || y >= HEIGHT || y <= 0)
+		alive = false;
+}

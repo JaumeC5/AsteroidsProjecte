@@ -8,7 +8,6 @@
 #include <iostream>
 #include <string>
 
-
 class Sprite {
 	SDL_Rect rect;
 	SDL_Texture* texture;

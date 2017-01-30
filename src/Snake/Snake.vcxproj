@@ -96,7 +96,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)\dep\inc;%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
     </ClCompile>
@@ -116,7 +116,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)\dep\inc;%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
     </ClCompile>
@@ -179,10 +179,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Asteroids_ToniFerrari_Jaume_Company.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bullet.hh" />
     <ClInclude Include="Bullet2.hh" />
     <ClInclude Include="configXML.hh" />
     <ClInclude Include="Mob.hh" />
@@ -190,12 +189,13 @@
     <ClInclude Include="ID.hh" />
     <ClInclude Include="Init.hh" />
     <ClInclude Include="InputManager.hh" />
+    <ClInclude Include="Ranking 2.h" />
     <ClInclude Include="Ranking.hh" />
     <ClInclude Include="Renderer.hh" />
     <ClInclude Include="Scene.hh" />
     <ClInclude Include="SpaceShip.hh" />
     <ClInclude Include="Sprite.hh" />
-    <ClInclude Include="Transform.hh" />
+    <ClInclude Include="UFOBullet.h" />
     <ClInclude Include="Window.hh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
